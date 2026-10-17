@@ -23,8 +23,8 @@ suspensão fixa, amortecedores e molas esportivas.
 | Banco, login e fotos | Supabase | Fase 2 (conta já criada pelo Leonardo, sem projeto ainda) |
 | Pagamento | Mercado Pago, Checkout Pro | Código pronto e **desligado** (fase 3) |
 | Frete | Melhor Envio (o Gilberto já tem contrato) | Fase 3 |
-| Hospedagem | Vercel, plano Hobby (conta já criada) | A publicar |
-| Repositório | GitHub público (`ILeozeraI/suspen-store`) | A criar |
+| Hospedagem | Vercel, plano Hobby | No ar em https://suspen-store.vercel.app (publica sozinho a cada push na `main`) |
+| Repositório | GitHub (`ILeozeraI/suspen-store`) | Criado |
 
 ## Como rodar no computador
 
@@ -80,6 +80,8 @@ src/
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
 - Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos. A **flange de ajuste de baixo é
   vermelha** (pedido do Gilberto). A faixa azul fina de cima, que aparece em alguns modelos, fica azul.
+- Manter o Next.js sempre na versão corrigida mais recente: a Vercel **bloqueia o deploy** de versões com falha de
+  segurança conhecida (aconteceu com a 15.5.4). O `overrides` do `package.json` força um PostCSS sem falhas.
 - No futuro: IA de atendimento no WhatsApp (Meta), marketplaces (Shopee, Mercado Livre, AliExpress, TikTok) e um
   segundo Instagram para suspensão usada. **Nada disso no começo.**
 

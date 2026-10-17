@@ -6,7 +6,8 @@ import { Rodape } from "@/components/Rodape";
 import { WhatsAppFlutuante } from "@/components/WhatsAppFlutuante";
 import { loja } from "@/data/loja";
 
-const site = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const site = process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(site),
