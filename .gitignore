@@ -1,0 +1,18 @@
+# dependências
+node_modules/
+
+# build do Next
+.next/
+out/
+
+# chaves e senhas: NUNCA subir para o GitHub
+.env
+.env.local
+.env.*.local
+
+# sistema
+.DS_Store
+Thumbs.db
+*.log
+.vercel
+next-env.d.ts
