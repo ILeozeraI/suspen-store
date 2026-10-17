@@ -13,11 +13,12 @@ Projeto desenvolvido por **Leonardo Cavalcanti da Silva** ([GitHub](https://gith
 - Carrinho salvo no navegador, com duas formas de fechar o pedido:
   - **Finalizar pelo WhatsApp**: abre a conversa com o pedido já escrito
   - **Pagar no site**: Mercado Pago Checkout Pro (Pix, cartão em até 12x e boleto), com preço sempre recalculado no servidor
+- Painel administrativo (`/admin`) com login: cadastro de produtos, preço, estoque e fotos, protegido por RLS no Supabase
 - Layout responsivo (celular e computador) e metadados para SEO e compartilhamento
 
 ## Tecnologias
 
-Next.js 15 · React 19 · TypeScript · CSS · Mercado Pago · (em breve) Supabase e Melhor Envio · Vercel
+Next.js 15 · React 19 · TypeScript · CSS · Supabase (Postgres, Auth, Storage) · Mercado Pago · (em breve) Melhor Envio · Vercel
 
 ## Rodando localmente
 
@@ -32,7 +33,7 @@ Acesse http://localhost:3000.
 ## Roadmap
 
 - [x] Vitrine, busca, filtro por carro, carrinho e pedido pelo WhatsApp
-- [ ] Painel administrativo com Supabase (produtos, preços, fotos e estoque)
+- [x] Painel administrativo com Supabase (produtos, preços, fotos e estoque)
 - [ ] Pagamento online (Mercado Pago) e cálculo de frete (Melhor Envio)
 - [ ] Páginas institucionais, indicação de instalador e domínio próprio
 

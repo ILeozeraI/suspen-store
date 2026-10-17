@@ -4,6 +4,7 @@ import { CarrinhoProvider } from "@/components/CarrinhoProvider";
 import { Cabecalho } from "@/components/Cabecalho";
 import { Rodape } from "@/components/Rodape";
 import { WhatsAppFlutuante } from "@/components/WhatsAppFlutuante";
+import { SoNaLoja } from "@/components/SoNaLoja";
 import { loja } from "@/data/loja";
 
 const site = process.env.NEXT_PUBLIC_SITE_URL ||
@@ -39,10 +40,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <CarrinhoProvider>
-          <Cabecalho />
+          <SoNaLoja>
+            <Cabecalho />
+          </SoNaLoja>
           <main>{children}</main>
-          <Rodape />
-          <WhatsAppFlutuante />
+          <SoNaLoja>
+            <Rodape />
+            <WhatsAppFlutuante />
+          </SoNaLoja>
         </CarrinhoProvider>
       </body>
     </html>

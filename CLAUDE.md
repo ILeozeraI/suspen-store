@@ -17,10 +17,10 @@ suspensão fixa, amortecedores e molas esportivas.
 
 | Parte | Ferramenta | Situação |
 |---|---|---|
-| Site | Next.js 15 (App Router) + React 19 + TypeScript | Pronto (fase 1) |
+| Site | Next.js 15 (App Router) + React 19 + TypeScript | Pronto |
 | Estilo | CSS puro em `src/app/globals.css` (sem Tailwind) | Pronto |
-| Produtos | Arquivo `src/data/produtos.ts` | Provisório: vai para o Supabase na fase 2 |
-| Banco, login e fotos | Supabase | Fase 2 (conta já criada pelo Leonardo, sem projeto ainda) |
+| Produtos | Tabela `produtos` no Supabase, editada pelo painel `/admin` | Fase 2 |
+| Banco, login e fotos | Supabase, projeto `suspen-store` (São Paulo), org. Suspen Store | Fase 2 |
 | Pagamento | Mercado Pago, Checkout Pro | Código pronto e **desligado** (fase 3) |
 | Frete | Melhor Envio (o Gilberto já tem contrato) | Fase 3 |
 | Hospedagem | Vercel, plano Hobby | No ar em https://suspen-store.vercel.app (publica sozinho a cada push na `main`) |
@@ -41,12 +41,20 @@ Copie `.env.example` para `.env.local` e preencha. **O `.env.local` nunca vai pa
 ## Onde fica cada coisa
 
 ```
+supabase/
+  schema.sql             estrutura do banco, regras de segurança, bucket de fotos e os 9 kits iniciais
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
 src/
   data/loja.ts           telefone, WhatsApp, horário, textos fixos da loja
-  data/produtos.ts       categorias e produtos + funções de busca e filtro
+  data/produtos.ts       tipos, categorias, lista reserva de produtos e funções de busca/filtro
+  lib/catalogo.ts        lê os produtos do Supabase (ou da lista reserva, se não houver Supabase)
+  lib/supabase/          conexão com o Supabase (config e cliente com login)
+  lib/admin.ts           checa se quem acessa o painel é admin
+  app/admin/             painel: login, lista de produtos, cadastro/edição (acoes.ts = salvar, excluir, sair)
+  components/admin/      formulário de produto e peças do painel
+  middleware.ts          renova o login do painel
   components/            cabeçalho, rodapé, cartão de produto, carrinho, busca por carro, botão do WhatsApp
   app/page.tsx           página inicial
   app/produtos/          listagem com filtros (?categoria=, ?montadora=, ?modelo=, ?busca=)
@@ -60,8 +68,13 @@ src/
 
 ## Tarefas comuns
 
-**Adicionar ou editar produto (até a fase 2):** edite `src/data/produtos.ts`. Coloque a foto em
-`public/produtos/` e aponte o campo `imagem`. `preco: null` mostra "Consulte o preço".
+**Adicionar ou editar produto:** pelo painel em `/admin` (login com e-mail e senha do Supabase). Preço vazio mostra
+"Consulte o preço"; estoque vazio não controla, 0 mostra "Esgotado". O site atualiza na hora ao salvar.
+
+**Dar acesso de admin a outra pessoa:** Supabase > Authentication > Users > Add user (com "Auto Confirm"). Depois, no
+SQL Editor: `insert into public.admins (user_id) select id from auth.users where email = 'email@da.pessoa';`
+
+**Mudar a estrutura do banco:** edite `supabase/schema.sql` e rode no SQL Editor (o arquivo pode ser rodado de novo).
 
 **Mudar telefone ou WhatsApp:** `src/data/loja.ts` (e a variável `NEXT_PUBLIC_WHATSAPP`).
 
@@ -76,6 +89,10 @@ src/
   pelo site. Pix, cartão em até 12x e boleto.
 - Preços **sempre recalculados no servidor** (`app/api/pagamento`). Nunca confiar no preço vindo do navegador.
 - Repositório público, mas **nenhuma chave ou senha no código**. Tudo em `.env.local` e nas variáveis da Vercel.
+- Supabase: o site usa só a **publishable key** (pública). A segurança fica nas regras RLS do banco: visitante só lê
+  produtos ativos; só quem está na tabela `admins` cadastra, edita, exclui e envia fotos. A **secret key nunca é usada**.
+- Cadastro público de usuários no Supabase fica **desligado**. Admins são criados à mão no painel do Supabase.
+- Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
 - Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos. A **flange de ajuste de baixo é
@@ -88,7 +105,7 @@ src/
 ## Fases
 
 1. **Vitrine** (feito): home, categorias, produto, busca, filtro por carro, carrinho, pedido pelo WhatsApp.
-2. **Painel admin**: Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
+2. **Painel admin** (código pronto): Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
 3. **Pagamento e frete**: ligar Mercado Pago (precisa do MEI novo do Gilberto e da conta MP no CNPJ) e Melhor Envio.
 4. **Acabamento**: páginas de trocas, privacidade, termos e FAQ, SEO, indicação de instalador depois da compra
    e ligação do domínio suspenstore.com.br.
@@ -96,7 +113,7 @@ src/
 ## Pendências de informação
 
 - [ ] Preços dos kits
-- [ ] Anos de aplicação de cada kit (campo `anos` em `produtos.ts`), que alimentam o filtro por carro
+- [ ] Anos de aplicação de cada kit (campo "Anos de aplicação" no painel)
 - [ ] Produtos das outras categorias (ar, fixa, amortecedores, molas)
 - [ ] E-mail comercial e Instagram da loja
 - [ ] Número definitivo do WhatsApp comercial (hoje: 11 96833-4426)

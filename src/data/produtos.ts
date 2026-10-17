@@ -1,9 +1,11 @@
-// Catálogo da loja.
-// Por enquanto os produtos ficam neste arquivo. Na fase 2 eles passam para o banco de dados
-// (Supabase) e serão cadastrados pelo painel admin, sem mexer em código.
+// Tipos, categorias e funções do catálogo.
+// Os produtos de verdade ficam no Supabase e são cadastrados pelo painel /admin.
+// A lista `produtosIniciais` abaixo serve de reserva: é usada quando o Supabase não está configurado
+// (ex.: rodando no PC sem .env.local) e foi a base para preencher o banco (supabase/schema.sql).
 //
-// preco: valor em reais (ex.: 1399.9). Deixe null para mostrar "Consulte o preço".
+// preco: valor em reais (ex.: 1399.9). null mostra "Consulte o preço".
 // precoAntigo: valor riscado de promoção (opcional).
+// estoque: null = não controla estoque; 0 = esgotado.
 
 export type Categoria = {
   slug: string;
@@ -12,6 +14,7 @@ export type Categoria = {
 };
 
 export type Produto = {
+  id?: string;
   slug: string;
   nome: string;
   categoria: string; // slug da categoria
@@ -24,6 +27,7 @@ export type Produto = {
   destaque?: boolean;
   resumo: string;
   observacao?: string;
+  estoque?: number | null;
 };
 
 export const categorias: Categoria[] = [
@@ -40,7 +44,7 @@ const resumoRosca =
 const obsAplicacao =
   "Antes de comprar, confirme a aplicação para o seu carro (modelo, ano e motor) com a nossa equipe pelo WhatsApp.";
 
-export const produtos: Produto[] = [
+export const produtosIniciais: Produto[] = [
   {
     slug: "kit-rosca-slim-gol-g5",
     nome: "Kit Rosca Slim Gol G5",
@@ -146,21 +150,17 @@ export const produtos: Produto[] = [
   },
 ];
 
-// ---------- funções de consulta ----------
-
-export function buscarProduto(slug: string) {
-  return produtos.find((p) => p.slug === slug);
-}
+// ---------- funções de consulta (recebem a lista de produtos) ----------
 
 export function buscarCategoria(slug: string) {
   return categorias.find((c) => c.slug === slug);
 }
 
-export function montadoras() {
-  return [...new Set(produtos.map((p) => p.montadora))].sort();
+export function esgotado(p: Produto) {
+  return p.estoque === 0;
 }
 
-export function modelosPorMontadora() {
+export function modelosPorMontadora(produtos: Produto[]) {
   const mapa: Record<string, string[]> = {};
   for (const p of produtos) {
     mapa[p.montadora] ??= [];
@@ -171,10 +171,13 @@ export function modelosPorMontadora() {
 }
 
 function normalizar(t: string) {
-  return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-export function filtrarProdutos(f: { categoria?: string; montadora?: string; modelo?: string; busca?: string }) {
+export function filtrarProdutos(
+  produtos: Produto[],
+  f: { categoria?: string; montadora?: string; modelo?: string; busca?: string }
+) {
   return produtos.filter((p) => {
     if (f.categoria && p.categoria !== f.categoria) return false;
     if (f.montadora && p.montadora !== f.montadora) return false;

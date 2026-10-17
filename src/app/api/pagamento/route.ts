@@ -3,7 +3,7 @@
 // Nunca confiamos no preço que vem do navegador.
 
 import { NextResponse } from "next/server";
-import { buscarProduto } from "@/data/produtos";
+import { buscarProduto } from "@/lib/catalogo";
 import { criarPagamento } from "@/lib/payments/mercadopago";
 
 export async function POST(req: Request) {
@@ -20,10 +20,13 @@ export async function POST(req: Request) {
 
   const itens = [];
   for (const i of corpo.itens ?? []) {
-    const p = buscarProduto(i.slug);
+    const p = await buscarProduto(i.slug);
     const qtd = Math.floor(Number(i.quantidade));
     if (!p || !Number.isFinite(qtd) || qtd < 1 || qtd > 20) {
       return NextResponse.json({ erro: "Item inválido no carrinho." }, { status: 400 });
+    }
+    if (p.estoque !== null && p.estoque !== undefined && qtd > p.estoque) {
+      return NextResponse.json({ erro: `"${p.nome}" não tem estoque suficiente.` }, { status: 400 });
     }
     if (!p.preco) {
       return NextResponse.json({ erro: `"${p.nome}" ainda não tem preço. Finalize pelo WhatsApp.` }, { status: 400 });

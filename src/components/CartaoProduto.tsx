@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { buscarCategoria, formatarPreco, type Produto } from "@/data/produtos";
+import { buscarCategoria, esgotado, formatarPreco, type Produto } from "@/data/produtos";
 import { BotaoAdicionar } from "./BotaoAdicionar";
 
 export function CartaoProduto({ produto }: { produto: Produto }) {
@@ -37,7 +37,13 @@ export function CartaoProduto({ produto }: { produto: Produto }) {
             <span className="consulte">Consulte o preço</span>
           )}
         </div>
-        <BotaoAdicionar slug={produto.slug} />
+        {esgotado(produto) ? (
+          <span className="btn btn--escuro" aria-disabled="true">
+            Esgotado
+          </span>
+        ) : (
+          <BotaoAdicionar slug={produto.slug} />
+        )}
       </div>
     </article>
   );

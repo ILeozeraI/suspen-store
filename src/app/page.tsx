@@ -3,9 +3,14 @@ import Link from "next/link";
 import { BuscaPorCarro } from "@/components/BuscaPorCarro";
 import { CartaoProduto } from "@/components/CartaoProduto";
 import { linkWhatsApp } from "@/data/loja";
-import { categorias, modelosPorMontadora, produtos } from "@/data/produtos";
+import { categorias, modelosPorMontadora } from "@/data/produtos";
+import { listarProdutos } from "@/lib/catalogo";
 
-export default function Inicio() {
+// Atualiza a página com os dados do banco a cada 5 minutos (e na hora, quando o admin salva).
+export const revalidate = 300;
+
+export default async function Inicio() {
+  const produtos = await listarProdutos();
   const destaques = produtos.filter((p) => p.destaque);
   const qtdPorCategoria = (slug: string) => produtos.filter((p) => p.categoria === slug).length;
 
@@ -45,13 +50,13 @@ export default function Inicio() {
               priority
               sizes="(max-width: 760px) 90vw, 520px"
             />
-            <span className="hero__selo">9 modelos de carro</span>
+            <span className="hero__selo">{produtos.filter((p) => p.categoria === "suspensao-a-rosca").length} modelos de carro</span>
           </div>
         </div>
       </section>
 
       <div className="container secao-busca">
-        <BuscaPorCarro modelos={modelosPorMontadora()} />
+        <BuscaPorCarro modelos={modelosPorMontadora(produtos)} />
       </div>
 
       <section className="secao container">

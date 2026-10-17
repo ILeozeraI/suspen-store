@@ -5,15 +5,18 @@ import { notFound } from "next/navigation";
 import { BotaoAdicionar } from "@/components/BotaoAdicionar";
 import { CartaoProduto } from "@/components/CartaoProduto";
 import { linkWhatsApp } from "@/data/loja";
-import { buscarCategoria, buscarProduto, formatarPreco, produtos } from "@/data/produtos";
+import { buscarCategoria, esgotado, formatarPreco } from "@/data/produtos";
+import { buscarProduto, listarProdutos } from "@/lib/catalogo";
 
-export function generateStaticParams() {
-  return produtos.map((p) => ({ slug: p.slug }));
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return (await listarProdutos()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const p = buscarProduto(slug);
+  const p = await buscarProduto(slug);
   if (!p) return {};
   return {
     title: p.nome,
@@ -24,8 +27,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PaginaProduto({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = buscarProduto(slug);
+  const p = await buscarProduto(slug);
   if (!p) notFound();
+  const produtos = await listarProdutos();
 
   const cat = buscarCategoria(p.categoria);
   const relacionados = produtos.filter((x) => x.categoria === p.categoria && x.slug !== p.slug).slice(0, 4);
@@ -66,7 +70,13 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
           </div>
 
           <div className="produto__acoes">
-            <BotaoAdicionar slug={p.slug} grande />
+            {esgotado(p) ? (
+              <span className="btn btn--escuro btn--grande" aria-disabled="true">
+                Esgotado
+              </span>
+            ) : (
+              <BotaoAdicionar slug={p.slug} grande />
+            )}
             <a href={linkWhatsApp(msgDuvida)} target="_blank" rel="noopener" className="btn btn--whats btn--grande">
               Tirar dúvida sobre aplicação
             </a>

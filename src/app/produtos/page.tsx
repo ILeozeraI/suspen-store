@@ -3,7 +3,8 @@ import Link from "next/link";
 import { BuscaPorCarro } from "@/components/BuscaPorCarro";
 import { CartaoProduto } from "@/components/CartaoProduto";
 import { linkWhatsApp } from "@/data/loja";
-import { buscarCategoria, categorias, filtrarProdutos, modelosPorMontadora, produtos } from "@/data/produtos";
+import { buscarCategoria, categorias, filtrarProdutos, modelosPorMontadora } from "@/data/produtos";
+import { listarProdutos } from "@/lib/catalogo";
 
 type Params = { categoria?: string; montadora?: string; modelo?: string; busca?: string };
 
@@ -23,7 +24,8 @@ function montarLink(atual: Params, mudanca: Partial<Params>) {
 
 export default async function Produtos({ searchParams }: { searchParams: Promise<Params> }) {
   const sp = await searchParams;
-  const lista = filtrarProdutos(sp);
+  const produtos = await listarProdutos();
+  const lista = filtrarProdutos(produtos, sp);
   const cat = sp.categoria ? buscarCategoria(sp.categoria) : undefined;
 
   const partes: string[] = [];
@@ -70,7 +72,7 @@ export default async function Produtos({ searchParams }: { searchParams: Promise
           <div style={{ marginBottom: 18 }}>
             <BuscaPorCarro
               key={`${sp.montadora}-${sp.modelo}`}
-              modelos={modelosPorMontadora()}
+              modelos={modelosPorMontadora(produtos)}
               inicialMontadora={sp.montadora}
               inicialModelo={sp.modelo}
             />
