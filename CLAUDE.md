@@ -19,8 +19,8 @@ suspensão fixa, amortecedores e molas esportivas.
 |---|---|---|
 | Site | Next.js 15 (App Router) + React 19 + TypeScript | Pronto |
 | Estilo | CSS puro em `src/app/globals.css` (sem Tailwind) | Pronto |
-| Produtos | Tabela `produtos` no Supabase, editada pelo painel `/admin` | Fase 2 |
-| Banco, login e fotos | Supabase, projeto `suspen-store` (São Paulo), org. Suspen Store | Fase 2 |
+| Produtos | Tabela `produtos` no Supabase, editada pelo painel `/admin` | Pronto |
+| Banco, login e fotos | Supabase, projeto `suspen-store` (São Paulo), org. Suspen Store | Pronto (admin: leonardo.devcorp@gmail.com) |
 | Pagamento | Mercado Pago, Checkout Pro | Código pronto e **desligado** (fase 3) |
 | Frete | Melhor Envio (o Gilberto já tem contrato) | Fase 3 |
 | Hospedagem | Vercel, plano Hobby | No ar em https://suspen-store.vercel.app (publica sozinho a cada push na `main`) |
@@ -36,7 +36,8 @@ npm run dev          # abre em http://localhost:3000
 npm run build        # confere se está tudo certo antes de publicar
 ```
 
-Copie `.env.example` para `.env.local` e preencha. **O `.env.local` nunca vai para o GitHub.**
+Copie `.env.example` para `.env.local` e preencha. Na Vercel já estão `NEXT_PUBLIC_SUPABASE_URL` e
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (tipo Config, ambiente Production). **O `.env.local` nunca vai para o GitHub.**
 
 ## Onde fica cada coisa
 
@@ -105,7 +106,7 @@ SQL Editor: `insert into public.admins (user_id) select id from auth.users where
 ## Fases
 
 1. **Vitrine** (feito): home, categorias, produto, busca, filtro por carro, carrinho, pedido pelo WhatsApp.
-2. **Painel admin** (código pronto): Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
+2. **Painel admin** (feito, em https://suspen-store.vercel.app/admin): Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
 3. **Pagamento e frete**: ligar Mercado Pago (precisa do MEI novo do Gilberto e da conta MP no CNPJ) e Melhor Envio.
 4. **Acabamento**: páginas de trocas, privacidade, termos e FAQ, SEO, indicação de instalador depois da compra
    e ligação do domínio suspenstore.com.br.
