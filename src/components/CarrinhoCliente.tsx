@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useCarrinho } from "@/components/CarrinhoProvider";
 import { linkWhatsApp } from "@/data/loja";
 import { formatarPreco, type Produto } from "@/data/produtos";
@@ -11,8 +10,6 @@ const pagamentoOnline = process.env.NEXT_PUBLIC_PAGAMENTO_ONLINE === "true";
 
 export function CarrinhoCliente({ produtos }: { produtos: Produto[] }) {
   const { itens, alterar, remover } = useCarrinho();
-  const [carregando, setCarregando] = useState(false);
-  const [erro, setErro] = useState("");
 
   const linhas = itens
     .map((i) => ({ ...i, produto: produtos.find((p) => p.slug === i.slug) }))
@@ -31,24 +28,6 @@ export function CarrinhoCliente({ produtos }: { produtos: Produto[] }) {
       .join("\n") +
     (todosComPreco && total ? `\n\nTotal dos produtos: ${formatarPreco(total)}` : "") +
     "\n\nMeu carro (modelo e ano): \nMeu CEP para o frete: ";
-
-  async function pagarNoSite() {
-    setErro("");
-    setCarregando(true);
-    try {
-      const r = await fetch("/api/pagamento", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ itens: itens.map((i) => ({ slug: i.slug, quantidade: i.quantidade })) }),
-      });
-      const dados = await r.json();
-      if (!r.ok || !dados.link) throw new Error(dados.erro || "Não foi possível iniciar o pagamento.");
-      window.location.href = dados.link;
-    } catch (e) {
-      setErro(e instanceof Error ? e.message : "Não foi possível iniciar o pagamento.");
-      setCarregando(false);
-    }
-  }
 
   if (linhas.length === 0) {
     return (
@@ -118,14 +97,14 @@ export function CarrinhoCliente({ produtos }: { produtos: Produto[] }) {
           </div>
 
           {pagamentoOnline && (
-            <button
-              type="button"
+            <Link
+              href={todosComPreco ? "/checkout" : "#"}
               className="btn btn--vermelho btn--grande"
-              onClick={pagarNoSite}
-              disabled={carregando || !todosComPreco}
+              aria-disabled={!todosComPreco}
+              onClick={(e) => !todosComPreco && e.preventDefault()}
             >
-              {carregando ? "Abrindo o Mercado Pago..." : "Pagar no site"}
-            </button>
+              Pagar no site
+            </Link>
           )}
           {pagamentoOnline && !todosComPreco && (
             <p>Algum item ainda está sem preço no site. Finalize pelo WhatsApp.</p>
@@ -137,7 +116,6 @@ export function CarrinhoCliente({ produtos }: { produtos: Produto[] }) {
           <p>
             Pelo WhatsApp, nossa equipe confirma a aplicação no seu carro, o valor do frete e a forma de pagamento.
           </p>
-          {erro && <p className="erro">{erro}</p>}
         </aside>
       </div>
     </>

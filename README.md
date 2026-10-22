@@ -12,13 +12,18 @@ Projeto desenvolvido por **Leonardo Cavalcanti da Silva** ([GitHub](https://gith
 - Página de produto com ficha de aplicação e atalho para tirar dúvida pelo WhatsApp
 - Carrinho salvo no navegador, com duas formas de fechar o pedido:
   - **Finalizar pelo WhatsApp**: abre a conversa com o pedido já escrito
-  - **Pagar no site**: Mercado Pago Checkout Pro (Pix, cartão em até 12x e boleto), com preço sempre recalculado no servidor
+  - **Pagar no site**: checkout em 3 etapas com Mercado Pago Checkout Transparente (Pix, cartão em até 12x e boleto),
+    com preço e frete sempre recalculados no servidor e confirmação por webhook assinado
+- Marketplace com fornecedores: frete calculado do endereço de cada fornecedor (Melhor Envio), comissão configurável,
+  etiquetas geradas pela loja e impressas pelo fornecedor
+- Painel de vendas com filtros por fornecedor e período (frete, taxa do Mercado Pago, repasse e lucro) e área do
+  fornecedor com saldo, protegida por RLS e funções do banco
 - Painel administrativo (`/admin`) com login: cadastro de produtos, preço, estoque e fotos, protegido por RLS no Supabase
 - Layout responsivo (celular e computador) e metadados para SEO e compartilhamento
 
 ## Tecnologias
 
-Next.js 15 · React 19 · TypeScript · CSS · Supabase (Postgres, Auth, Storage) · Mercado Pago · (em breve) Melhor Envio · Vercel
+Next.js 15 · React 19 · TypeScript · CSS · Supabase (Postgres, Auth, Storage, RLS) · Mercado Pago · Melhor Envio · Vercel
 
 ## Rodando localmente
 
@@ -34,7 +39,9 @@ Acesse http://localhost:3000.
 
 - [x] Vitrine, busca, filtro por carro, carrinho e pedido pelo WhatsApp
 - [x] Painel administrativo com Supabase (produtos, preços, fotos e estoque)
-- [ ] Pagamento online (Mercado Pago) e cálculo de frete (Melhor Envio)
+- [x] Checkout transparente (Mercado Pago), frete por fornecedor e etiquetas (Melhor Envio)
+- [x] Fornecedores, comissão, painel de vendas e área do fornecedor
+- [ ] Integração com o Bling
 - [ ] Páginas institucionais, indicação de instalador e domínio próprio
 
 Detalhes técnicos e decisões do projeto: [CLAUDE.md](./CLAUDE.md).

@@ -22,6 +22,12 @@ export type LinhaProduto = {
   estoque: number | null;
   ativo: boolean;
   ordem: number;
+  fornecedor_id: string | null;
+  frete_gratis: boolean;
+  peso_kg: number | null;
+  altura_cm: number | null;
+  largura_cm: number | null;
+  comprimento_cm: number | null;
 };
 
 export function deLinha(l: LinhaProduto): Produto {
@@ -40,6 +46,12 @@ export function deLinha(l: LinhaProduto): Produto {
     resumo: l.resumo,
     observacao: l.observacao ?? undefined,
     estoque: l.estoque,
+    fornecedorId: l.fornecedor_id ?? null,
+    freteGratis: l.frete_gratis ?? false,
+    pesoKg: l.peso_kg === null || l.peso_kg === undefined ? null : Number(l.peso_kg),
+    alturaCm: l.altura_cm ?? null,
+    larguraCm: l.largura_cm ?? null,
+    comprimentoCm: l.comprimento_cm ?? null,
   };
 }
 

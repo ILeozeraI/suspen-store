@@ -3,10 +3,19 @@ import Link from "next/link";
 import { salvarProduto } from "@/app/admin/acoes";
 import { categorias } from "@/data/produtos";
 import type { LinhaProduto } from "@/lib/catalogo";
+import type { Fornecedor } from "@/lib/tipos";
 import { BotaoEnviar } from "./BotaoEnviar";
 
 // Formulário de cadastro e edição de produto.
-export function FormProduto({ p }: { p?: LinhaProduto }) {
+export function FormProduto({
+  p,
+  fornecedores,
+  custo,
+}: {
+  p?: LinhaProduto;
+  fornecedores: Pick<Fornecedor, "id" | "nome" | "cidade" | "uf">[];
+  custo?: number | null;
+}) {
   const preco = (v: number | null | undefined) => (v ? Number(v).toFixed(2).replace(".", ",") : "");
   return (
     <form action={salvarProduto} className="admin__form">
@@ -62,6 +71,48 @@ export function FormProduto({ p }: { p?: LinhaProduto }) {
           Estoque<small>Vazio = não controlar · 0 = esgotado</small>
           <input name="estoque" defaultValue={p?.estoque ?? ""} inputMode="numeric" />
         </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fornecedor e custo</legend>
+        <label>
+          Fornecedor *<small>O frete sai do endereço dele</small>
+          <select name="fornecedor_id" defaultValue={p?.fornecedor_id ?? fornecedores[0]?.id ?? ""} required>
+            {fornecedores.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.nome} ({f.cidade}/{f.uf})
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Custo (R$)<small>Só no modelo revenda: quanto a loja paga ao fornecedor. Só o admin vê</small>
+          <input name="custo" defaultValue={preco(custo)} inputMode="decimal" placeholder="900,00" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Frete</legend>
+        <label className="admin__check admin__largo">
+          <input type="checkbox" name="frete_gratis" defaultChecked={p?.frete_gratis ?? false} /> Frete grátis (a loja paga o frete)
+        </label>
+        <label>
+          Peso embalado (kg) *
+          <input name="peso_kg" defaultValue={p?.peso_kg ? String(p.peso_kg).replace(".", ",") : ""} inputMode="decimal" placeholder="12,5" />
+        </label>
+        <label>
+          Altura da caixa (cm) *
+          <input name="altura_cm" defaultValue={p?.altura_cm ?? ""} inputMode="numeric" />
+        </label>
+        <label>
+          Largura da caixa (cm) *
+          <input name="largura_cm" defaultValue={p?.largura_cm ?? ""} inputMode="numeric" />
+        </label>
+        <label>
+          Comprimento da caixa (cm) *
+          <input name="comprimento_cm" defaultValue={p?.comprimento_cm ?? ""} inputMode="numeric" />
+        </label>
+        <p className="admin__dica admin__largo">Sem peso e medidas o site não consegue calcular o frete deste produto.</p>
       </fieldset>
 
       <fieldset>

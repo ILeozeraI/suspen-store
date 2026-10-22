@@ -28,6 +28,12 @@ export type Produto = {
   resumo: string;
   observacao?: string;
   estoque?: number | null;
+  fornecedorId?: string | null;
+  freteGratis?: boolean;
+  pesoKg?: number | null;
+  alturaCm?: number | null;
+  larguraCm?: number | null;
+  comprimentoCm?: number | null;
 };
 
 export const categorias: Categoria[] = [

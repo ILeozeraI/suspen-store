@@ -16,7 +16,7 @@ export default async function PainelAdmin({ searchParams }: { searchParams: Prom
 
   return (
     <>
-      <TopoAdmin email={user.email} />
+      <TopoAdmin email={user.email} aba="produtos" />
       <div className="admin__conteudo">
         <div className="admin__titulo">
           <h1>Produtos ({lista.length})</h1>

@@ -82,6 +82,14 @@ export async function salvarProduto(form: FormData) {
   const destaque = form.get("destaque") === "on";
   const ativo = form.get("ativo") === "on";
   const foto = form.get("foto");
+  const fornecedorId = String(form.get("fornecedor_id") ?? "") || null;
+  const custo = lerPreco(form.get("custo"));
+  const freteGratis = form.get("frete_gratis") === "on";
+  const pesoTxt = String(form.get("peso_kg") ?? "").trim().replace(",", ".");
+  const pesoKg = pesoTxt ? Number(pesoTxt) : null;
+  const altura = lerInteiro(form.get("altura_cm"));
+  const largura = lerInteiro(form.get("largura_cm"));
+  const comprimento = lerInteiro(form.get("comprimento_cm"));
 
   if (!nome || nome.length > 120) voltarCom(origem, "Preencha o nome (até 120 letras).");
   if (!slug) voltarCom(origem, "Endereço (slug) inválido.");
@@ -93,6 +101,11 @@ export async function salvarProduto(form: FormData) {
   if (precoAntigo === "invalido") voltarCom(origem, "Preço antigo inválido. Exemplo: 1599,90");
   if (estoque === "invalido") voltarCom(origem, "Estoque precisa ser um número inteiro (ou vazio).");
   if (ordem === "invalido") voltarCom(origem, "Ordem precisa ser um número inteiro (ou vazio).");
+  if (!fornecedorId) voltarCom(origem, "Escolha o fornecedor.");
+  if (custo === "invalido") voltarCom(origem, "Custo inválido. Exemplo: 900,00");
+  if (pesoKg !== null && (!Number.isFinite(pesoKg) || pesoKg <= 0 || pesoKg > 300)) voltarCom(origem, "Peso inválido. Exemplo: 12,5");
+  if (altura === "invalido" || largura === "invalido" || comprimento === "invalido")
+    voltarCom(origem, "Medidas da caixa em centímetros, número inteiro.");
 
   let imagem = String(form.get("imagem_atual") ?? "") || null;
   if (foto instanceof File && foto.size > 0) {
@@ -122,15 +135,28 @@ export async function salvarProduto(form: FormData) {
     estoque,
     ativo,
     ordem: ordem ?? 0,
+    fornecedor_id: fornecedorId,
+    frete_gratis: freteGratis,
+    peso_kg: pesoKg,
+    altura_cm: altura || null,
+    largura_cm: largura || null,
+    comprimento_cm: comprimento || null,
   };
 
-  const { error } = id
-    ? await sb.from("produtos").update(dados).eq("id", id)
-    : await sb.from("produtos").insert(dados);
-  if (error) {
-    if (error.code === "23505") voltarCom(origem, "Já existe um produto com esse endereço (slug). Mude o nome ou o slug.");
-    voltarCom(origem, `Não consegui salvar: ${error.message}`);
+  const { data: salvo, error } = id
+    ? await sb.from("produtos").update(dados).eq("id", id).select("id").single()
+    : await sb.from("produtos").insert(dados).select("id").single();
+  if (error || !salvo) {
+    if (error?.code === "23505") voltarCom(origem, "Já existe um produto com esse endereço (slug). Mude o nome ou o slug.");
+    voltarCom(origem, `Não consegui salvar: ${error?.message}`);
   }
+
+  // Custo fica numa tabela só do admin (a tabela de produtos é pública)
+  const { error: eCusto } =
+    custo === null
+      ? await sb.from("produtos_custos").delete().eq("produto_id", salvo.id)
+      : await sb.from("produtos_custos").upsert({ produto_id: salvo.id, custo });
+  if (eCusto) voltarCom(`/admin/produtos/${salvo.id}`, `Produto salvo, mas o custo não: ${eCusto.message}`);
 
   revalidatePath("/", "layout");
   redirect(`/admin?ok=${encodeURIComponent(`"${nome}" salvo.`)}`);

@@ -22,10 +22,14 @@ export default async function EditarProduto({
   const { data } = await sb.from("produtos").select("*").eq("id", id).maybeSingle();
   if (!data) notFound();
   const p = data as LinhaProduto;
+  const [{ data: fornecedores }, { data: custo }] = await Promise.all([
+    sb.from("fornecedores").select("id, nome, cidade, uf").or(`ativo.eq.true,id.eq.${p.fornecedor_id ?? p.id}`).order("nome"),
+    sb.from("produtos_custos").select("custo").eq("produto_id", p.id).maybeSingle(),
+  ]);
 
   return (
     <>
-      <TopoAdmin email={user.email} />
+      <TopoAdmin email={user.email} aba="produtos" />
       <div className="admin__conteudo">
         <Link href="/admin" className="admin__voltar">
           ← Produtos
@@ -39,7 +43,7 @@ export default async function EditarProduto({
           )}
         </div>
         <Avisos erro={erro} />
-        <FormProduto p={p} />
+        <FormProduto p={p} fornecedores={fornecedores ?? []} custo={custo ? Number(custo.custo) : null} />
         <div className="admin__zona-perigo">
           <BotaoExcluir id={p.id} nome={p.nome} />
         </div>

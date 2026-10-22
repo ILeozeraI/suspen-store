@@ -5,6 +5,6 @@ import type { ReactNode } from "react";
 
 export function SoNaLoja({ children }: { children: ReactNode }) {
   const caminho = usePathname();
-  if (caminho?.startsWith("/admin")) return null;
+  if (caminho?.startsWith("/admin") || caminho?.startsWith("/fornecedor")) return null;
   return <>{children}</>;
 }
