@@ -1,3 +1,5 @@
+<img width="1600" height="792" alt="suspen-store-home" src="https://github.com/user-attachments/assets/f7bbb0a9-f818-4931-b62c-43c3e6ecffcd" />
+
 # Suspen Store
 
 Loja virtual da Suspen Store, especializada em suspensão para carros rebaixados: kits de suspensão a rosca,
