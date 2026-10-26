@@ -37,8 +37,11 @@ npm run dev          # abre em http://localhost:3000
 npm run build        # confere se está tudo certo antes de publicar
 ```
 
-Copie `.env.example` para `.env.local` e preencha. Na Vercel já estão `NEXT_PUBLIC_SUPABASE_URL` e
-`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (tipo Config, ambiente Production). **O `.env.local` nunca vai para o GitHub.**
+Copie `.env.example` para `.env.local` e preencha. Na Vercel (ambiente Production) já estão:
+`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (Config), `SUPABASE_SECRET_KEY`, `ME_TOKEN`
+(token de produção do Melhor Envio, conta suspenstoreoficial@gmail.com), `ME_AMBIENTE=producao` e `ME_EMAIL_CONTATO` (Secret).
+Faltam as chaves do Mercado Pago (`NEXT_PUBLIC_MP_PUBLIC_KEY`, `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET`) e ligar
+`NEXT_PUBLIC_PAGAMENTO_ONLINE=true`. **O `.env.local` nunca vai para o GitHub.**
 
 ## Onde fica cada coisa
 
@@ -137,6 +140,10 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
 - Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos. A **flange de ajuste de baixo é
   vermelha** (pedido do Gilberto). A faixa azul fina de cima, que aparece em alguns modelos, fica azul.
+- **Supabase grátis pausa o projeto após 7 dias sem uso** (aconteceu em 26/10/2026). A Vercel chama
+  `/api/manter-ativo` todo dia às 9h de Brasília (`vercel.json` > `crons`) para manter ativo. Se pausar mesmo assim:
+  Supabase > projeto > **Restore project** (dá para restaurar em até 90 dias). Quando a loja tiver movimento ou
+  dinheiro, avaliar o plano Pro (não pausa e tem backup diário).
 - Manter o Next.js sempre na versão corrigida mais recente: a Vercel **bloqueia o deploy** de versões com falha de
   segurança conhecida (aconteceu com a 15.5.4). O `overrides` do `package.json` força um PostCSS sem falhas.
 - No futuro: IA de atendimento no WhatsApp (Meta), marketplaces (Shopee, Mercado Livre, AliExpress, TikTok) e um
@@ -160,6 +167,10 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 - [ ] Número definitivo do WhatsApp comercial (hoje: 11 96833-4426)
 - [ ] Lista de instaladores parceiros (nome, cidade, contato)
 - [ ] Acesso ao domínio suspenstore.com.br
+- [ ] Endereço completo do estoque (hoje: CEP 06150108 provisório, só para frete; CNPJ 69.743.693/0001-09 já cadastrado)
+- [ ] Verificação da conta do Melhor Envio (precisa ser feita pela titular) e saldo para etiquetas
+- [ ] Conta do Bling (CNPJ novo ainda não aparecia na Receita em 22/10/2026)
+- [ ] Catálogo dos fornecedores parceiros e valores (comissão)
 
 ## Ligar pagamento e frete, passo a passo
 
