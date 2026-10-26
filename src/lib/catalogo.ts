@@ -65,7 +65,15 @@ export const listarProdutos = cache(async (): Promise<Produto[]> => {
     .eq("ativo", true)
     .order("ordem", { ascending: true })
     .order("nome", { ascending: true });
-  if (error) throw new Error(`Erro ao ler produtos do Supabase: ${error.message}`);
+  if (error) {
+    // Durante a publicação (build), um Supabase fora do ar não pode derrubar o deploy: as páginas saem vazias
+    // e se atualizam sozinhas com os dados reais em até 5 minutos (revalidate). Fora do build, o erro aparece.
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      console.warn(`[catalogo] Supabase indisponível durante o build, seguindo sem produtos: ${error.message.slice(0, 200)}`);
+      return [];
+    }
+    throw new Error(`Erro ao ler produtos do Supabase: ${error.message}`);
+  }
   return (data as LinhaProduto[]).map(deLinha);
 });
 

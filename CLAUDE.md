@@ -143,7 +143,8 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 - **Supabase grátis pausa o projeto após 7 dias sem uso** (aconteceu em 26/10/2026). A Vercel chama
   `/api/manter-ativo` todo dia às 9h de Brasília (`vercel.json` > `crons`) para manter ativo. Se pausar mesmo assim:
   Supabase > projeto > **Restore project** (dá para restaurar em até 90 dias). Quando a loja tiver movimento ou
-  dinheiro, avaliar o plano Pro (não pausa e tem backup diário).
+  dinheiro, avaliar o plano Pro (não pausa e tem backup diário). Se o Supabase estiver fora do ar durante uma
+  publicação, o build não falha mais (`lib/catalogo.ts`): as páginas saem sem produtos e se atualizam em até 5 min.
 - Manter o Next.js sempre na versão corrigida mais recente: a Vercel **bloqueia o deploy** de versões com falha de
   segurança conhecida (aconteceu com a 15.5.4). O `overrides` do `package.json` força um PostCSS sem falhas.
 - No futuro: IA de atendimento no WhatsApp (Meta), marketplaces (Shopee, Mercado Livre, AliExpress, TikTok) e um
