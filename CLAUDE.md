@@ -49,6 +49,7 @@ Faltam as chaves do Mercado Pago (`NEXT_PUBLIC_MP_PUBLIC_KEY`, `MP_ACCESS_TOKEN`
 supabase/
   schema.sql             parte 1: produtos, admins, fotos e os 9 kits iniciais
   002_fornecedores_vendas.sql  parte 2: fornecedores, custos, pedidos, itens, envios, acertos, funções da área do fornecedor
+  003_novos_modelos.sql  Gol G6, Gol G7+, Uno Quadrado e Palio Furo Reto (fotos reaproveitadas); Palio Fire renomeado
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
