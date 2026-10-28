@@ -139,8 +139,9 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 - Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
-- Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos. A **flange de ajuste de baixo é
-  vermelha** (pedido do Gilberto). A faixa azul fina de cima, que aparece em alguns modelos, fica azul.
+- Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos e **flange de ajuste de baixo AZUL**.
+  Em 16/10/2026 a flange foi trocada para vermelha a pedido do Gilberto, mas em 28/10/2026 o Leonardo confirmou que
+  o correto é a **azul** (fotos originais). As versões vermelhas não são mais usadas.
 - **Supabase grátis pausa o projeto após 7 dias sem uso** (aconteceu em 26/10/2026). A Vercel chama
   `/api/manter-ativo` todo dia às 9h de Brasília (`vercel.json` > `crons`) para manter ativo. Se pausar mesmo assim:
   Supabase > projeto > **Restore project** (dá para restaurar em até 90 dias). Quando a loja tiver movimento ou
