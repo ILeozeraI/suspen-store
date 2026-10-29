@@ -40,8 +40,11 @@ npm run build        # confere se está tudo certo antes de publicar
 Copie `.env.example` para `.env.local` e preencha. Na Vercel (ambiente Production) já estão:
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (Config), `SUPABASE_SECRET_KEY`, `ME_TOKEN`
 (token de produção do Melhor Envio, conta suspenstoreoficial@gmail.com), `ME_AMBIENTE=producao` e `ME_EMAIL_CONTATO` (Secret).
-Faltam as chaves do Mercado Pago (`NEXT_PUBLIC_MP_PUBLIC_KEY`, `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET`) e ligar
-`NEXT_PUBLIC_PAGAMENTO_ONLINE=true`. **O `.env.local` nunca vai para o GitHub.**
+Também já estão as credenciais de **produção** do Mercado Pago (29/10/2026): `NEXT_PUBLIC_MP_PUBLIC_KEY` (Config) e
+`MP_ACCESS_TOKEN` (Secret). O Access Token passou por WhatsApp: **renovar no painel do Mercado Pago antes de ligar o
+pagamento** e trocar na Vercel. Faltam `MP_WEBHOOK_SECRET`, preços/peso/medidas dos kits e ligar
+`NEXT_PUBLIC_PAGAMENTO_ONLINE=true`. Domínio suspenstore.com.br adicionado na Vercel (DNS no Cloudflare: CNAME @ e www
+para o endereço que a Vercel mostra em Settings > Domains, proxy desligado). **O `.env.local` nunca vai para o GitHub.**
 
 ## Onde fica cada coisa
 
@@ -51,7 +54,8 @@ supabase/
   002_fornecedores_vendas.sql  parte 2: fornecedores, custos, pedidos, itens, envios, acertos, funções da área do fornecedor
   003_novos_modelos.sql  Gol G6, Gol G7+, Uno Quadrado e Palio Furo Reto (fotos reaproveitadas); Palio Fire renomeado
   004_kit_vw_g1_g4.sql   Kit Rosca Slim Volkswagen Linha G1 a G4 (foto própria, gerada no ChatGPT, flange azul)
-  005_vw_g1_g4_aplicacoes.sql  carros que o kit VW G1 a G4 atende (lista do Gilberto; ele vai mandar mais)
+  005_vw_g1_g4_aplicacoes.sql  primeira lista de carros do kit VW G1 a G4 (substituída pela 006)
+  006_vw_g1_g4_lista_final.sql  lista completa (13 carros) do kit VW G1 a G4, mandada pelo Gilberto em 29/10/2026
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
