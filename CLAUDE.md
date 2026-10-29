@@ -57,6 +57,7 @@ supabase/
   005_vw_g1_g4_aplicacoes.sql  primeira lista de carros do kit VW G1 a G4 (substituída pela 006)
   006_vw_g1_g4_lista_final.sql  lista completa (15 carros) do kit VW G1 a G4, mandada pelo Gilberto em 29/10/2026
   007_astra_vectra.sql   kit do Astra vira "Astra / Vectra": Astra 2000 em diante e Vectra 2006 em diante
+  008_corsa_celta_prisma.sql  kit do Corsa vira "Corsa / Celta / Prisma" (versões na observação)
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
