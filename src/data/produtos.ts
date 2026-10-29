@@ -52,6 +52,17 @@ const obsAplicacao =
 
 export const produtosIniciais: Produto[] = [
   {
+    slug: "kit-rosca-slim-vw-g1-g4",
+    nome: "Kit Rosca Slim Volkswagen Linha G1 a G4",
+    categoria: "suspensao-a-rosca",
+    montadora: "Volkswagen",
+    modelos: ["Gol G1", "Gol G2", "Gol G3", "Gol G4"],
+    imagem: "/produtos/kit-rosca-slim-vw-g1-g4.jpg",
+    preco: null,
+    resumo: resumoRosca,
+    observacao: "Kit para a linha Volkswagen G1 a G4. " + obsAplicacao,
+  },
+  {
     slug: "kit-rosca-slim-gol-g5",
     nome: "Kit Rosca Slim Gol G5",
     categoria: "suspensao-a-rosca",
