@@ -55,7 +55,8 @@ supabase/
   003_novos_modelos.sql  Gol G6, Gol G7+, Uno Quadrado e Palio Furo Reto (fotos reaproveitadas); Palio Fire renomeado
   004_kit_vw_g1_g4.sql   Kit Rosca Slim Volkswagen Linha G1 a G4 (foto própria, gerada no ChatGPT, flange azul)
   005_vw_g1_g4_aplicacoes.sql  primeira lista de carros do kit VW G1 a G4 (substituída pela 006)
-  006_vw_g1_g4_lista_final.sql  lista completa (13 carros) do kit VW G1 a G4, mandada pelo Gilberto em 29/10/2026
+  006_vw_g1_g4_lista_final.sql  lista completa (15 carros) do kit VW G1 a G4, mandada pelo Gilberto em 29/10/2026
+  007_astra_vectra.sql   kit do Astra vira "Astra / Vectra": Astra 2000 em diante e Vectra 2006 em diante
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
