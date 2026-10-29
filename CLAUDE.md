@@ -58,6 +58,7 @@ supabase/
   006_vw_g1_g4_lista_final.sql  lista completa (15 carros) do kit VW G1 a G4, mandada pelo Gilberto em 29/10/2026
   007_astra_vectra.sql   kit do Astra vira "Astra / Vectra": Astra 2000 em diante e Vectra 2006 em diante
   008_corsa_celta_prisma.sql  kit do Corsa vira "Corsa / Celta / Prisma" (versões na observação)
+  009_um_kit_por_carro.sql  **um card por carro**: VW G1-G4 vira 15 kits, Astra/Vectra 2, Corsa/Celta/Prisma 4, Uno Way/Vivace 2
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -147,6 +148,10 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 - Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
+- **Um kit (card) para cada carro** (decisão do Leonardo, 29/10/2026), como no Mercado Livre: mesmo que a peça e a
+  foto sejam iguais, cada carro/geração tem o seu produto, com o ano no nome quando precisar (ex.: "Vectra 2006 em
+  diante"). Mudança de preço em massa: fazer por SQL filtrando pela imagem ou pelo nome. A lista reserva em
+  `src/data/produtos.ts` não acompanha mais todos os kits: o banco é a fonte.
 - Fotos dos kits: fundo branco, molas vermelhas, roscas cromadas, pratos brancos e **flange de ajuste de baixo AZUL**.
   Em 16/10/2026 a flange foi trocada para vermelha a pedido do Gilberto, mas em 28/10/2026 o Leonardo confirmou que
   o correto é a **azul** (fotos originais). As versões vermelhas não são mais usadas.
