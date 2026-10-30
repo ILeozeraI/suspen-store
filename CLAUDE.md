@@ -59,7 +59,8 @@ supabase/
   007_astra_vectra.sql   kit do Astra vira "Astra / Vectra": Astra 2000 em diante e Vectra 2006 em diante
   008_corsa_celta_prisma.sql  kit do Corsa vira "Corsa / Celta / Prisma" (versões na observação)
   009_um_kit_por_carro.sql  **um card por carro**: VW G1-G4 vira 15 kits, Astra/Vectra 2, Corsa/Celta/Prisma 4, Uno Way/Vivace 2
-  010_vectra_antigo.sql  kit Vectra da foto antiga = "Vectra até 2000" (Gilberto vai mandar outros carros; falta foto do kit Vectra 2000 a 2006)
+  010_vectra_antigo.sql  kit Vectra da foto antiga = "Vectra até 2000" (Gilberto vai mandar outros carros; falta foto do kit Vectra 2000 a 2005)
+  011_uno_palio_siena.sql  Uno Quadrado 1984 a 2013 (versões), kits novos Palio 1996 a 2012 e Siena 1997 a 2012 (foto do Palio Fire)
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
