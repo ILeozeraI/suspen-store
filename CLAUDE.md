@@ -11,7 +11,8 @@ suspensão fixa, amortecedores e molas esportivas.
 - Dono do negócio: **Gilberto** (tio do Leonardo). Aprova mudanças junto com o **João**.
 - Responsável pelo site: **Leonardo Cavalcanti da Silva** (GitHub: ILeozeraI).
 - Estoque em Osasco/SP, venda só online, envio para todo o Brasil. Atendimento das 7h30 às 17h.
-- Domínio pretendido: suspenstore.com.br (hoje aponta para um site antigo em WordPress feito pelo João).
+- Domínio: **www.suspenstore.com.br** (comprado na Hostinger, DNS no Cloudflare gerido pelo João: CNAME @ e www para a
+  Vercel, proxy desligado). O site antigo em WordPress saiu do ar em 09/11/2026.
 
 ## Tecnologias
 
@@ -24,7 +25,7 @@ suspensão fixa, amortecedores e molas esportivas.
 | Pagamento | Mercado Pago, **Checkout Transparente** (Payment Brick: Pix, cartão 12x, boleto) | Código pronto, **desligado** até ter as chaves |
 | Frete e etiquetas | Melhor Envio: cotação por fornecedor, compra/geração/impressão de etiqueta | Código pronto, falta o token |
 | Fornecedores e vendas | Tabelas no Supabase + painel `/admin/fornecedores`, `/admin/vendas` e área `/fornecedor` | Código pronto (rodar `supabase/002_fornecedores_vendas.sql`) |
-| Hospedagem | Vercel, plano Hobby | No ar em https://suspen-store.vercel.app (publica sozinho a cada push na `main`) |
+| Hospedagem | Vercel, plano Hobby | No ar em **https://www.suspenstore.com.br** desde 09/11/2026 (o domínio sem www redireciona; suspen-store.vercel.app continua funcionando). Publica sozinho a cada push na `main` |
 | Repositório | GitHub (`ILeozeraI/suspen-store`) | Criado |
 
 ## Como rodar no computador
@@ -170,7 +171,7 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 ## Fases
 
 1. **Vitrine** (feito): home, categorias, produto, busca, filtro por carro, carrinho, pedido pelo WhatsApp.
-2. **Painel admin** (feito, em https://suspen-store.vercel.app/admin): Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
+2. **Painel admin** (feito, em https://www.suspenstore.com.br/admin): Supabase com login (por enquanto só o Leonardo), cadastro de produto, preço, foto e estoque.
 3. **Pagamento, frete, fornecedores e vendas** (código pronto, falta ligar): Mercado Pago transparente, Melhor Envio,
    fornecedores com comissão, painel de vendas, área do fornecedor. Depois: integração com o Bling.
 4. **Acabamento**: páginas de trocas, privacidade, termos e FAQ, SEO, indicação de instalador depois da compra
@@ -184,7 +185,7 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 - [ ] E-mail comercial e Instagram da loja
 - [ ] Número definitivo do WhatsApp comercial (hoje: 11 96833-4426)
 - [ ] Lista de instaladores parceiros (nome, cidade, contato)
-- [ ] Acesso ao domínio suspenstore.com.br
+- [x] Domínio suspenstore.com.br apontado para o site novo (09/11/2026)
 - [ ] Endereço completo do estoque (hoje: CEP 06150108 provisório, só para frete; CNPJ 69.743.693/0001-09 já cadastrado)
 - [ ] Verificação da conta do Melhor Envio (precisa ser feita pela titular) e saldo para etiquetas
 - [ ] Conta do Bling (CNPJ novo ainda não aparecia na Receita em 22/10/2026)

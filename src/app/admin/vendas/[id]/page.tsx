@@ -5,6 +5,7 @@ import { formatarPreco } from "@/data/produtos";
 import { exigirAdmin } from "@/lib/admin";
 import type { Envio, Fornecedor, Pedido, PedidoItem } from "@/lib/tipos";
 import { NOME_FRETE_MODELO, NOME_STATUS } from "@/lib/tipos";
+import { urlSite } from "@/lib/site";
 import { calcularLinha } from "@/lib/vendas";
 import { Avisos } from "@/components/admin/Avisos";
 import { BotaoEnviar } from "@/components/admin/BotaoEnviar";
@@ -40,7 +41,7 @@ export default async function DetalheVenda({
   const avisoWhats = (e: Envio) => {
     const f = fornecedores.find((x) => x.id === e.fornecedor_id);
     if (!f?.telefone) return null;
-    const txt = `Olá, ${f.nome}! Tem etiqueta nova do pedido ${p.numero} da Suspen Store para postar. Ela já está na sua área: https://suspen-store.vercel.app/fornecedor`;
+    const txt = `Olá, ${f.nome}! Tem etiqueta nova do pedido ${p.numero} da Suspen Store para postar. Ela já está na sua área: ${urlSite()}/fornecedor`;
     return `https://wa.me/55${f.telefone}?text=${encodeURIComponent(txt)}`;
   };
 
