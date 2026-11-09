@@ -123,6 +123,24 @@ export function FormProduto({
           <small>JPG, PNG ou WEBP, até 4 MB. De preferência quadrada e com fundo branco.</small>
           <input type="file" name="foto" accept="image/jpeg,image/png,image/webp" required={!p} />
         </label>
+        {(p?.fotos_extras ?? []).length > 0 && (
+          <div className="admin__largo admin__extras">
+            {(p?.fotos_extras ?? []).map((u, n) => (
+              <label key={u} className="admin__extra">
+                <input type="hidden" name="extras_atuais" value={u} />
+                <Image src={u} alt={`Foto extra ${n + 1}`} width={120} height={120} />
+                <span>
+                  <input type="checkbox" name="remover_extra" value={u} /> Remover
+                </span>
+              </label>
+            ))}
+          </div>
+        )}
+        <label className="admin__largo">
+          Adicionar fotos extras
+          <small>Aparecem depois da foto principal, na página do kit (ex.: a arte de regulagem de altura). Pode escolher várias.</small>
+          <input type="file" name="fotos_extras" accept="image/jpeg,image/png,image/webp" multiple />
+        </label>
       </fieldset>
 
       <fieldset>

@@ -22,6 +22,7 @@ export type LinhaProduto = {
   estoque: number | null;
   ativo: boolean;
   ordem: number;
+  fotos_extras: string[] | null;
   fornecedor_id: string | null;
   frete_gratis: boolean;
   peso_kg: number | null;
@@ -46,6 +47,7 @@ export function deLinha(l: LinhaProduto): Produto {
     resumo: l.resumo,
     observacao: l.observacao ?? undefined,
     estoque: l.estoque,
+    fotosExtras: l.fotos_extras ?? [],
     fornecedorId: l.fornecedor_id ?? null,
     freteGratis: l.frete_gratis ?? false,
     pesoKg: l.peso_kg === null || l.peso_kg === undefined ? null : Number(l.peso_kg),

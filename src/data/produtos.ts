@@ -28,6 +28,7 @@ export type Produto = {
   resumo: string;
   observacao?: string;
   estoque?: number | null;
+  fotosExtras?: string[];
   fornecedorId?: string | null;
   freteGratis?: boolean;
   pesoKg?: number | null;

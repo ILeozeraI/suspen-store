@@ -62,6 +62,7 @@ supabase/
   009_um_kit_por_carro.sql  **um card por carro**: VW G1-G4 vira 15 kits, Astra/Vectra 2, Corsa/Celta/Prisma 4, Uno Way/Vivace 2
   010_vectra_antigo.sql  kit Vectra da foto antiga = "Vectra até 2000" (Gilberto vai mandar outros carros; falta foto do kit Vectra 2000 a 2005)
   011_uno_palio_siena.sql  Uno Quadrado 1984 a 2013 (versões), kits novos Palio 1996 a 2012 e Siena 1997 a 2012 (foto do Palio Fire)
+  012_fotos_extras.sql   coluna fotos_extras: várias fotos por kit (galeria na página do produto)
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -111,6 +112,11 @@ comissão (% ou R$ por peça) e quem paga o frete. Na página dele: criar login 
 
 **Gerar etiqueta:** `/admin/vendas` > pedido > "Pagar e gerar etiqueta" (paga com o saldo do Melhor Envio). A etiqueta
 aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no WhatsApp" manda o aviso.
+
+**Fotos extras de um kit:** `/admin` > kit > "Adicionar fotos extras" (aparecem depois da foto principal, com
+miniaturas). A última foto de cada kit deve ser a **arte de regulagem de altura** daquele carro: medida **Social**
+(Baixo: 2 cm entre pneu e para-lama; Alto: 4 a 8 cm), com a frente do próprio carro (pedido do Gilberto, 09/11/2026).
+As fotos do carro são geradas no ChatGPT sem texto; os textos e a logo são montados por cima.
 
 **Venda do WhatsApp:** `/admin/vendas` > "Lançar venda do WhatsApp". Preço livre e produto fora do site.
 

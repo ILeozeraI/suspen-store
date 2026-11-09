@@ -119,6 +119,21 @@ export async function salvarProduto(form: FormData) {
   }
   if (!imagem) voltarCom(origem, "Envie uma foto do produto.");
 
+  // Fotos extras: mantém as que não foram marcadas para remover e acrescenta as novas no final
+  const remover = new Set(form.getAll("remover_extra").map(String));
+  const fotosExtras = form.getAll("extras_atuais").map(String).filter((u) => u && !remover.has(u));
+  const novasExtras = form.getAll("fotos_extras").filter((f): f is File => f instanceof File && f.size > 0);
+  if (fotosExtras.length + novasExtras.length > 8) voltarCom(origem, "No máximo 8 fotos extras por kit.");
+  for (const [n, f] of novasExtras.entries()) {
+    const ext = TIPOS_FOTO[f.type];
+    if (!ext) voltarCom(origem, "As fotos extras precisam ser JPG, PNG ou WEBP.");
+    if (f.size > MAX_FOTO) voltarCom(origem, "Cada foto extra pode ter no máximo 4 MB.");
+    const caminho = `${slug}-extra-${Date.now()}-${n}.${ext}`;
+    const { error } = await sb.storage.from(BUCKET).upload(caminho, f, { contentType: f.type });
+    if (error) voltarCom(origem, `Não consegui enviar a foto extra: ${error.message}`);
+    fotosExtras.push(sb.storage.from(BUCKET).getPublicUrl(caminho).data.publicUrl);
+  }
+
   const dados = {
     slug,
     nome,
@@ -127,6 +142,7 @@ export async function salvarProduto(form: FormData) {
     modelos,
     anos,
     imagem,
+    fotos_extras: fotosExtras,
     preco,
     preco_antigo: precoAntigo,
     destaque,

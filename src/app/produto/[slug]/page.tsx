@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BotaoAdicionar } from "@/components/BotaoAdicionar";
 import { CartaoProduto } from "@/components/CartaoProduto";
+import { GaleriaProduto } from "@/components/GaleriaProduto";
 import { linkWhatsApp } from "@/data/loja";
 import { buscarCategoria, esgotado, formatarPreco } from "@/data/produtos";
 import { buscarProduto, listarProdutos } from "@/lib/catalogo";
@@ -43,9 +43,7 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
       </nav>
 
       <div className="produto">
-        <div className="produto__foto">
-          <Image src={p.imagem} alt={p.nome} width={1254} height={1254} priority sizes="(max-width: 760px) 100vw, 600px" />
-        </div>
+        <GaleriaProduto fotos={[p.imagem, ...(p.fotosExtras ?? [])]} nome={p.nome} />
 
         <div className="produto__info">
           <span className="eyebrow">
