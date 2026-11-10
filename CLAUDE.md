@@ -63,6 +63,7 @@ supabase/
   010_vectra_antigo.sql  kit Vectra da foto antiga = "Vectra até 2000" (Gilberto vai mandar outros carros; falta foto do kit Vectra 2000 a 2005)
   011_uno_palio_siena.sql  Uno Quadrado 1984 a 2013 (versões), kits novos Palio 1996 a 2012 e Siena 1997 a 2012 (foto do Palio Fire)
   012_fotos_extras.sql   coluna fotos_extras: várias fotos por kit (galeria na página do produto)
+  013_artes_regulagem.sql  arte de regulagem de altura no fim das fotos extras dos 35 kits (public/produtos/regulagem/)
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -116,7 +117,10 @@ aparece na área do fornecedor para ele imprimir; o botão "Avisar fornecedor no
 **Fotos extras de um kit:** `/admin` > kit > "Adicionar fotos extras" (aparecem depois da foto principal, com
 miniaturas). A última foto de cada kit deve ser a **arte de regulagem de altura** daquele carro: medida **Social**
 (Baixo: 2 cm entre pneu e para-lama; Alto: 4 a 8 cm), com a frente do próprio carro (pedido do Gilberto, 09/11/2026).
-As fotos do carro são geradas no ChatGPT sem texto; os textos e a logo são montados por cima.
+As fotos do carro são geradas no ChatGPT sem texto; os textos e a logo são montados por cima. As 35 artes estão em
+`public/produtos/regulagem/regulagem-<parte do slug>.jpg` e são ligadas aos kits pelo `013_artes_regulagem.sql`
+(o Uno Fire e o Uno Quadrado usam a mesma foto do carro, com nomes diferentes na arte). Kit novo: gerar a arte e
+acrescentar uma linha nesse SQL.
 
 **Venda do WhatsApp:** `/admin/vendas` > "Lançar venda do WhatsApp". Preço livre e produto fora do site.
 
