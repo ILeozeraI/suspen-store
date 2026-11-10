@@ -23,7 +23,7 @@ export function CarrinhoCliente({ produtos }: { produtos: Produto[] }) {
     linhas
       .map(
         (l) =>
-          `• ${l.quantidade}x ${l.produto.nome}${l.produto.preco ? ` (${formatarPreco(l.produto.preco * l.quantidade)})` : ""}`
+          `• ${l.quantidade}x ${l.produto.nome}${l.produto.sku ? ` [${l.produto.sku}]` : ""}${l.produto.preco ? ` (${formatarPreco(l.produto.preco * l.quantidade)})` : ""}`
       )
       .join("\n") +
     (todosComPreco && total ? `\n\nTotal dos produtos: ${formatarPreco(total)}` : "") +

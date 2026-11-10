@@ -33,6 +33,7 @@ export default async function PainelAdmin({ searchParams }: { searchParams: Prom
               <div>
                 <strong>{p.nome}</strong>
                 <small>
+                  {p.sku ? `${p.sku} · ` : "sem SKU · "}
                   {buscarCategoria(p.categoria)?.nome} · {p.montadora}
                   {!p.ativo && " · fora do site"}
                   {p.destaque && " · destaque"}

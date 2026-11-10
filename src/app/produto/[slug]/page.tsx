@@ -33,7 +33,7 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
 
   const cat = buscarCategoria(p.categoria);
   const relacionados = produtos.filter((x) => x.categoria === p.categoria && x.slug !== p.slug).slice(0, 4);
-  const msgDuvida = `Olá! Tenho interesse no ${p.nome}. Meu carro é: (modelo, ano e motor)`;
+  const msgDuvida = `Olá! Tenho interesse no ${p.nome}${p.sku ? ` (${p.sku})` : ""}. Meu carro é: (modelo, ano e motor)`;
 
   return (
     <div className="container">
@@ -81,6 +81,12 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
           </div>
 
           <dl className="ficha">
+            {p.sku && (
+              <>
+                <dt>Código (SKU)</dt>
+                <dd>{p.sku}</dd>
+              </>
+            )}
             <dt>Categoria</dt>
             <dd>{cat?.nome}</dd>
             <dt>Montadora</dt>

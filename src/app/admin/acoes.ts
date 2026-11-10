@@ -66,6 +66,13 @@ export async function salvarProduto(form: FormData) {
 
   const nome = String(form.get("nome") ?? "").trim();
   const slug = gerarSlug(String(form.get("slug") ?? "").trim() || nome);
+  // SKU: SS-SUBCATEGORIA-MODELO, maiúsculo, sem espaço nem acento (ex.: SS-SLIM-GOLG5)
+  const sku =
+    String(form.get("sku") ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase()
+      .replace(/\s+/g, "") || null;
   const categoria = String(form.get("categoria") ?? "");
   const montadora = String(form.get("montadora") ?? "").trim();
   const modelos = String(form.get("modelos") ?? "")
@@ -93,6 +100,8 @@ export async function salvarProduto(form: FormData) {
 
   if (!nome || nome.length > 120) voltarCom(origem, "Preencha o nome (até 120 letras).");
   if (!slug) voltarCom(origem, "Endereço (slug) inválido.");
+  if (sku && !/^SS(-[A-Z0-9]+){2,}$/.test(sku))
+    voltarCom(origem, "SKU no formato SS-SUBCATEGORIA-MODELO, só letras e números. Exemplo: SS-SLIM-GOLG5");
   if (!categorias.some((c) => c.slug === categoria)) voltarCom(origem, "Escolha uma categoria.");
   if (!montadora) voltarCom(origem, "Preencha a montadora.");
   if (modelos.length === 0) voltarCom(origem, "Preencha pelo menos um modelo de carro.");
@@ -136,6 +145,7 @@ export async function salvarProduto(form: FormData) {
 
   const dados = {
     slug,
+    sku,
     nome,
     categoria,
     montadora,
@@ -163,7 +173,13 @@ export async function salvarProduto(form: FormData) {
     ? await sb.from("produtos").update(dados).eq("id", id).select("id").single()
     : await sb.from("produtos").insert(dados).select("id").single();
   if (error || !salvo) {
-    if (error?.code === "23505") voltarCom(origem, "Já existe um produto com esse endereço (slug). Mude o nome ou o slug.");
+    if (error?.code === "23505")
+      voltarCom(
+        origem,
+        error.message.includes("sku")
+          ? `Já existe outro anúncio com o SKU ${sku}. Cada anúncio precisa de um SKU diferente.`
+          : "Já existe um produto com esse endereço (slug). Mude o nome ou o slug."
+      );
     voltarCom(origem, `Não consegui salvar: ${error?.message}`);
   }
 

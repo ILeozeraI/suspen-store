@@ -207,7 +207,7 @@ export async function registrarVendaManual(form: FormData) {
 
   const { data: prods } = await sb
     .from("produtos")
-    .select("id, peso_kg, altura_cm, largura_cm, comprimento_cm")
+    .select("id, sku, peso_kg, altura_cm, largura_cm, comprimento_cm")
     .in("id", itens.map((i) => i.produtoId).filter(Boolean) as string[]);
 
   const linhas = itens.map((i) => {
@@ -218,6 +218,7 @@ export async function registrarVendaManual(form: FormData) {
       produto_id: i.produtoId || null,
       fornecedor_id: i.fornecedorId,
       nome: i.nome.slice(0, 160),
+      sku: (i.produtoId && prods?.find((x) => x.id === i.produtoId)?.sku) || null,
       quantidade: i.quantidade,
       preco_unitario: i.preco,
       custo_unitario: i.custo || 0,

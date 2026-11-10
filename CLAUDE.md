@@ -64,6 +64,7 @@ supabase/
   011_uno_palio_siena.sql  Uno Quadrado 1984 a 2013 (versões), kits novos Palio 1996 a 2012 e Siena 1997 a 2012 (foto do Palio Fire)
   012_fotos_extras.sql   coluna fotos_extras: várias fotos por kit (galeria na página do produto)
   013_artes_regulagem.sql  arte de regulagem de altura no fim das fotos extras dos 35 kits (public/produtos/regulagem/)
+  014_sku.sql            coluna sku (código do anúncio, único) nos produtos e nos itens do pedido; SKU dos 35 kits
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -161,6 +162,11 @@ acrescentar uma linha nesse SQL.
 - Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
+- **SKU (código do anúncio)** no formato **SS-SUBCATEGORIA-MODELO**, maiúsculo, sem espaço nem acento (pedido do João,
+  aprovado pelo Gilberto em 10/11/2026, inspirado na Redcoil: SS-AIR-8VBLUETOOTH). Kits rosca slim usam `SLIM`
+  (ex.: SS-SLIM-GOLG5, SS-SLIM-PARATISURF, SS-SLIM-VECTRA2006). Cada anúncio tem um SKU diferente (o banco não deixa
+  repetir). Aparece na página do produto, no painel, na mensagem do WhatsApp e fica guardado em cada item do pedido
+  (para separar no estoque e, no futuro, usar no Bling). Produto novo: preencher o campo SKU no `/admin`.
 - **Um kit (card) para cada carro** (decisão do Leonardo, 29/10/2026), como no Mercado Livre: mesmo que a peça e a
   foto sejam iguais, cada carro/geração tem o seu produto, com o ano no nome quando precisar (ex.: "Vectra 2006 em
   diante"). Mudança de preço em massa: fazer por SQL filtrando pela imagem ou pelo nome. A lista reserva em

@@ -8,6 +8,7 @@ import { SUPABASE_KEY, SUPABASE_URL, supabaseConfigurado } from "./supabase/conf
 export type LinhaProduto = {
   id: string;
   slug: string;
+  sku: string | null;
   nome: string;
   categoria: string;
   montadora: string;
@@ -35,6 +36,7 @@ export function deLinha(l: LinhaProduto): Produto {
   return {
     id: l.id,
     slug: l.slug,
+    sku: l.sku ?? null,
     nome: l.nome,
     categoria: l.categoria,
     montadora: l.montadora,

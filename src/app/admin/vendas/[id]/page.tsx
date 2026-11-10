@@ -141,7 +141,10 @@ export default async function DetalheVenda({
               <tbody>
                 {itens.map((i) => (
                   <tr key={i.id}>
-                    <td>{i.nome}</td>
+                    <td>
+                      {i.nome}
+                      {i.sku && <small style={{ display: "block", opacity: 0.7 }}>{i.sku}</small>}
+                    </td>
                     <td>{nomeF(i.fornecedor_id)}</td>
                     <td className="num">{i.quantidade}</td>
                     <td className="num">{formatarPreco(Number(i.preco_unitario))}</td>

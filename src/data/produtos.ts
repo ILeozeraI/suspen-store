@@ -16,6 +16,7 @@ export type Categoria = {
 export type Produto = {
   id?: string;
   slug: string;
+  sku?: string | null; // código do anúncio: SS-SUBCATEGORIA-MODELO (ex.: SS-SLIM-GOLG5)
   nome: string;
   categoria: string; // slug da categoria
   montadora: string;
@@ -261,7 +262,7 @@ export function filtrarProdutos(
     if (f.montadora && p.montadora !== f.montadora) return false;
     if (f.modelo && !p.modelos.includes(f.modelo)) return false;
     if (f.busca) {
-      const alvo = normalizar([p.nome, p.montadora, ...p.modelos, buscarCategoria(p.categoria)?.nome ?? ""].join(" "));
+      const alvo = normalizar([p.nome, p.sku ?? "", p.montadora, ...p.modelos, buscarCategoria(p.categoria)?.nome ?? ""].join(" "));
       const termos = normalizar(f.busca).split(/\s+/).filter(Boolean);
       if (!termos.every((t) => alvo.includes(t))) return false;
     }

@@ -64,6 +64,7 @@ export type PedidoItem = {
   produto_id: string | null;
   fornecedor_id: string | null;
   nome: string;
+  sku: string | null;
   quantidade: number;
   preco_unitario: number;
   custo_unitario: number;

@@ -117,6 +117,7 @@ export async function POST(req: Request) {
           produto_id: p.id,
           fornecedor_id: pacote.fornecedor.id,
           nome: p.nome,
+          sku: p.sku ?? null,
           quantidade,
           preco_unitario: p.preco!,
           custo_unitario: custo,
