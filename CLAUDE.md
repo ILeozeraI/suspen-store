@@ -65,6 +65,8 @@ supabase/
   012_fotos_extras.sql   coluna fotos_extras: várias fotos por kit (galeria na página do produto)
   013_artes_regulagem.sql  arte de regulagem de altura no fim das fotos extras dos 35 kits (public/produtos/regulagem/)
   014_sku.sql            coluna sku (código do anúncio, único) nos produtos e nos itens do pedido; SKU dos 35 kits
+  015_nomes_seo.sql      nomes para o Google: "Kit Suspensão Rosca Slim Completo <carro> com Amortecedores" e resumo com o que vem
+                         no kit (4 amortecedores reduzidos com tubos de rosca, 4 molas e 4 batentes); slug não muda
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -93,6 +95,7 @@ src/
   app/page.tsx           página inicial
   app/produtos/          listagem com filtros (?categoria=, ?montadora=, ?modelo=, ?busca=)
   app/produto/[slug]/    página de cada produto
+  app/trocas-e-garantia/ página de trocas, devoluções e garantia (regras do Gilberto, 11/11/2026; link no rodapé)
   app/carrinho/          carrinho com "Finalizar pelo WhatsApp" e "Pagar no site" (leva ao checkout)
   app/pedido/concluido|pendente  telas antigas do Checkout Pro (não usadas; podem ser apagadas)
   app/globals.css        todo o visual (cores e fontes no topo, em :root)
@@ -133,6 +136,9 @@ acrescentar uma linha nesse SQL.
 
 - O pedido pode ser fechado de **duas formas, permanentes**: pagando no site (Mercado Pago) ou pelo WhatsApp.
   O WhatsApp não é provisório.
+  **O site é o foco** (Gilberto e João, 10/11/2026): o cliente deve resolver e finalizar a compra no site. O WhatsApp
+  fecha só casos especiais (kit super alto ou super baixo, projeto técnico) e pedidos grandes de lojista. Ideia para
+  depois: botão ou chat no site para falar com alguém ou com uma IA.
 - O site só vai **oficialmente** para o ar quando pagamento e frete estiverem funcionando.
 - Pagamento: **Mercado Pago, Checkout Transparente** (pedido do Gilberto e do João). O cliente paga sem sair do site,
   no formulário do Mercado Pago (Payment Brick), que troca o cartão por um token: dados de cartão nunca passam pelo
@@ -160,8 +166,22 @@ acrescentar uma linha nesse SQL.
   criar logins de fornecedor. Fica só na Vercel (Secret) e no `.env.local`.
 - Cadastro público de usuários no Supabase fica **desligado**. Admins são criados à mão no painel do Supabase.
 - Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
+- **Trocas e garantia** (Gilberto, 11/11/2026): garantia de **6 meses** em qualquer peça dos kits; não cobre
+  instalação errada fora do diagrama de instalação; troca por compra errada em até **7 dias**, frete por conta do
+  comprador. Desistência em 7 dias (art. 49 do CDC): devolve o valor pago, incluindo o frete.
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
+- **SKU em revisão (10/11/2026):** a loja vai vender kit completo (4 amortecedores reduzidos, 4 tubos, 4 molas e
+  4 batentes), kit parcial sem amortecedor (4 tubos, 4 PUs e 4 molas), pares dianteiro/traseiro e peças avulsas
+  (molas, roscas/tubos, PU, amortecedor sem rosca, batentes, molas esportivas, ponta de eixo, peças de kit ar e kit ar).
+  Combinado até agora: `SLIMC` = kit completo, `SLIMP` = kit parcial; tubo de rosca usa `ROSCA` (é o termo mais
+  buscado); peças pela **medida**, não pelo carro (Gilberto: evita o cliente comprar errado); quantidade no fim
+  (4 = jogo, 2 = par, D/T = par dianteiro/traseiro). **Rosca (tubo) fechado em 10/11/2026:** marca + diâmetro
+  interno, ex.: `SS-ROSCA-FORMULA-51MM-INTER`, `SS-ROSCA-FORMULA-47MM-INTER`, `SS-ROSCA-FORMULA-45MM-INTER`. O
+  encaixe (interno) é o que importa; a altura vai na descrição. Dianteira/traseira **não** vai no código, porque
+  depende do carro (a 47 mm do Corsa serve na dianteira e, com arruela soldada, na traseira; a 45 mm é só traseira; a
+  51 mm serve na traseira de BMW e na dianteira de metade dos carros): isso vai na descrição. Em aberto: SKU dos kits
+  (proposta SS-SLIMC-GOLG5-4) e das molas. Os SKUs abaixo (SS-SLIM-...) serão trocados quando fechar.
 - **SKU (código do anúncio)** no formato **SS-SUBCATEGORIA-MODELO**, maiúsculo, sem espaço nem acento (pedido do João,
   aprovado pelo Gilberto em 10/11/2026, inspirado na Redcoil: SS-AIR-8VBLUETOOTH). Kits rosca slim usam `SLIM`
   (ex.: SS-SLIM-GOLG5, SS-SLIM-PARATISURF, SS-SLIM-VECTRA2006). Cada anúncio tem um SKU diferente (o banco não deixa
@@ -206,6 +226,8 @@ acrescentar uma linha nesse SQL.
 - [ ] Verificação da conta do Melhor Envio (precisa ser feita pela titular) e saldo para etiquetas
 - [ ] Conta do Bling (CNPJ novo ainda não aparecia na Receita em 22/10/2026)
 - [ ] Catálogo dos fornecedores parceiros e valores (comissão)
+- [ ] CEP **07022-290** (Guarulhos/SP), é do **fornecedor** da loja (confirmado pelo Gilberto em
+  10/11/2026): de lá vão sair alguns dos produtos. Falta nome, endereço completo e comissão para cadastrar em `/admin/fornecedores`
 
 ## Ligar pagamento e frete, passo a passo
 

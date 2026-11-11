@@ -42,6 +42,9 @@ export function Rodape() {
             <li>Pix, cartão em até 12x ou boleto</li>
             <li>Envio para todo o Brasil</li>
             <li>Indicação de instalador parceiro</li>
+            <li>
+              <Link href="/trocas-e-garantia">Trocas, devoluções e garantia</Link>
+            </li>
           </ul>
         </div>
       </div>
