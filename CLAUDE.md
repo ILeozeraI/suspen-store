@@ -134,7 +134,7 @@ acrescentar uma linha nesse SQL.
 
 **Venda do WhatsApp:** `/admin/vendas` > "Lançar venda do WhatsApp". Preço livre e produto fora do site.
 
-**Mudar telefone ou WhatsApp:** `src/data/loja.ts` (e a variável `NEXT_PUBLIC_WHATSAPP`).
+**Mudar telefone ou WhatsApp:** `src/data/loja.ts` (só lá; a variável `NEXT_PUBLIC_WHATSAPP` não é mais usada).
 
 **Mudar cores:** variáveis no topo de `src/app/globals.css`.
 
@@ -226,7 +226,7 @@ acrescentar uma linha nesse SQL.
 - [ ] Anos de aplicação de cada kit (campo "Anos de aplicação" no painel)
 - [ ] Produtos das outras categorias (ar, fixa, amortecedores, molas)
 - [ ] E-mail comercial e Instagram da loja
-- [ ] Número definitivo do WhatsApp comercial (hoje: 11 96833-4426)
+- [x] Número do WhatsApp da loja: **(11) 96598-1230**, contato direto da Suspen Store (Gilberto, 11/11/2026), em `src/data/loja.ts`
 - [ ] Lista de instaladores parceiros (nome, cidade, contato)
 - [x] Domínio suspenstore.com.br apontado para o site novo (09/11/2026)
 - [x] Google Search Console: propriedade https://www.suspenstore.com.br/ verificada (arquivo HTML) e sitemap.xml enviado
