@@ -67,6 +67,7 @@ supabase/
   014_sku.sql            coluna sku (código do anúncio, único) nos produtos e nos itens do pedido; SKU dos 35 kits
   015_nomes_seo.sql      nomes para o Google: "Kit Suspensão Rosca Slim Completo <carro> com Amortecedores" e resumo com o que vem
                          no kit (4 amortecedores reduzidos com tubos de rosca, 4 molas e 4 batentes); slug não muda
+  016_sku_kits_completos.sql  SKU final dos kits completos: SS-SLIM-GOLG5 vira SS-SLIMC-GOLG5-4
 public/
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
@@ -181,11 +182,11 @@ acrescentar uma linha nesse SQL.
   interno, ex.: `SS-ROSCA-FORMULA-51MM-INTER`, `SS-ROSCA-FORMULA-47MM-INTER`, `SS-ROSCA-FORMULA-45MM-INTER`. O
   encaixe (interno) é o que importa; a altura vai na descrição. Dianteira/traseira **não** vai no código, porque
   depende do carro (a 47 mm do Corsa serve na dianteira e, com arruela soldada, na traseira; a 45 mm é só traseira; a
-  51 mm serve na traseira de BMW e na dianteira de metade dos carros): isso vai na descrição. Em aberto: SKU dos kits
-  (proposta SS-SLIMC-GOLG5-4) e das molas. Os SKUs abaixo (SS-SLIM-...) serão trocados quando fechar.
+  51 mm serve na traseira de BMW e na dianteira de metade dos carros): isso vai na descrição. **Kits completos fechados em
+  11/11/2026:** `SS-SLIMC-<CARRO>-4` (ex.: SS-SLIMC-GOLG5-4), aplicado pelo `016_sku_kits_completos.sql`. Em aberto: molas.
 - **SKU (código do anúncio)** no formato **SS-SUBCATEGORIA-MODELO**, maiúsculo, sem espaço nem acento (pedido do João,
-  aprovado pelo Gilberto em 10/11/2026, inspirado na Redcoil: SS-AIR-8VBLUETOOTH). Kits rosca slim usam `SLIM`
-  (ex.: SS-SLIM-GOLG5, SS-SLIM-PARATISURF, SS-SLIM-VECTRA2006). Cada anúncio tem um SKU diferente (o banco não deixa
+  aprovado pelo Gilberto em 10/11/2026, inspirado na Redcoil: SS-AIR-8VBLUETOOTH). Kits rosca slim completos usam
+  `SLIMC` + carro + quantidade (ex.: SS-SLIMC-GOLG5-4, SS-SLIMC-PARATISURF-4). Cada anúncio tem um SKU diferente (o banco não deixa
   repetir). Aparece na página do produto, no painel, na mensagem do WhatsApp e fica guardado em cada item do pedido
   (para separar no estoque e, no futuro, usar no Bling). Produto novo: preencher o campo SKU no `/admin`.
 - **Um kit (card) para cada carro** (decisão do Leonardo, 29/10/2026), como no Mercado Livre: mesmo que a peça e a
@@ -241,12 +242,15 @@ acrescentar uma linha nesse SQL.
 - **Fretes:** a loja paga o primeiro envio e o retorno da peça em desistência ou cancelamento. Garantia e erro no envio:
   frete por conta do fornecedor. Compra errada: o comprador paga o frete de ida. Gilberto perguntou se ativar a logística
   reversa (devolução) no Melhor Envio encarece o frete. Página /trocas-e-garantia já atualizada (11/11).
+- **VPS:** o João perguntou (11/11) se dá para subir o site numa VPS depois. Dá: Next.js roda em VPS (Node ou Docker), o
+  Supabase continua igual. Na VPS é preciso cuidar de deploy, https, atualizações e do cron `/api/manter-ativo`.
+  Pode sair mais barato que a Vercel Pro. Ainda não decidido; falta saber qual VPS eles têm.
 - **Rosca slim:** todos os kits saem do fornecedor de Guarulhos (CEP 07022-290). Vão entrar outros fornecedores com os
   mesmos produtos (outro endereço). O Gilberto está pegando os dados do fornecedor.
 - **Nota fiscal:** no começo a loja opera como se comprasse e revendesse; emite nota só quando o cliente pedir (Bling
   integra os pedidos). Atenção ao limite de faturamento anual (João citou R$ 80 mil).
 - **SKU:** o João disse para simplificar: uma identificação simples com abreviações, como a dos tubos que o Gilberto fez,
-  e seguir em frente.
+  e seguir em frente. Aplicado: SS-SLIMC-<CARRO>-4.
 
 ## Ligar pagamento e frete, passo a passo
 

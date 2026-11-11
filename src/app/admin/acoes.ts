@@ -66,7 +66,7 @@ export async function salvarProduto(form: FormData) {
 
   const nome = String(form.get("nome") ?? "").trim();
   const slug = gerarSlug(String(form.get("slug") ?? "").trim() || nome);
-  // SKU: SS-SUBCATEGORIA-MODELO, maiúsculo, sem espaço nem acento (ex.: SS-SLIM-GOLG5)
+  // SKU: SS-SUBCATEGORIA-MODELO, maiúsculo, sem espaço nem acento (ex.: SS-SLIMC-GOLG5-4)
   const sku =
     String(form.get("sku") ?? "")
       .normalize("NFD")
@@ -101,7 +101,7 @@ export async function salvarProduto(form: FormData) {
   if (!nome || nome.length > 120) voltarCom(origem, "Preencha o nome (até 120 letras).");
   if (!slug) voltarCom(origem, "Endereço (slug) inválido.");
   if (sku && !/^SS(-[A-Z0-9]+){2,}$/.test(sku))
-    voltarCom(origem, "SKU no formato SS-SUBCATEGORIA-MODELO, só letras e números. Exemplo: SS-SLIM-GOLG5");
+    voltarCom(origem, "SKU no formato SS-SUBCATEGORIA-MODELO, só letras e números. Exemplo: SS-SLIMC-GOLG5-4");
   if (!categorias.some((c) => c.slug === categoria)) voltarCom(origem, "Escolha uma categoria.");
   if (!montadora) voltarCom(origem, "Preencha a montadora.");
   if (modelos.length === 0) voltarCom(origem, "Preencha pelo menos um modelo de carro.");

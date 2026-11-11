@@ -29,14 +29,14 @@ export function FormProduto({
           <input name="nome" defaultValue={p?.nome} required maxLength={120} placeholder="Kit Rosca Slim Gol G5" />
         </label>
         <label>
-          SKU (código do anúncio)<small>SS-SUBCATEGORIA-MODELO. Ex.: SS-SLIM-GOLG5</small>
+          SKU (código do anúncio)<small>SS-SUBCATEGORIA-MODELO. Ex.: SS-SLIMC-GOLG5-4</small>
           <input
             name="sku"
             defaultValue={p?.sku ?? ""}
             maxLength={40}
-            placeholder="SS-SLIM-GOLG5"
+            placeholder="SS-SLIMC-GOLG5-4"
             pattern="[Ss][Ss](-[A-Za-z0-9]+){2,}"
-            title="Formato SS-SUBCATEGORIA-MODELO, só letras e números. Exemplo: SS-SLIM-GOLG5"
+            title="Formato SS-SUBCATEGORIA-MODELO, só letras e números. Exemplo: SS-SLIMC-GOLG5-4"
             style={{ textTransform: "uppercase" }}
           />
         </label>
