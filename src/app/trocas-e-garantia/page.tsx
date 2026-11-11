@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { metaPagina } from "@/lib/metadados";
 import { loja, linkWhatsApp } from "@/data/loja";
 
 // Regras definidas pelo Gilberto em 11/11/2026. Para mudar prazo ou regra, edite os textos abaixo.
-export const metadata: Metadata = {
-  title: "Trocas, devoluções e garantia",
-  description:
-    "Garantia de 6 meses em todas as peças dos kits, troca em até 7 dias e direito de desistência. Veja como funciona na Suspen Store.",
-};
+export const metadata: Metadata = metaPagina(
+  "Trocas, devoluções e garantia",
+  "Garantia de 6 meses em todas as peças dos kits, troca em até 7 dias e direito de desistência. Veja como funciona na Suspen Store."
+);
 
 export default function TrocasEGarantia() {
   return (

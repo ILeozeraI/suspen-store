@@ -90,6 +90,7 @@ src/
   lib/payments/          mercadopago.ts (Checkout Transparente, webhook)
   lib/repasse.ts         conta da comissão/repasse de cada item
   lib/vendas.ts          contas do painel de vendas (lucro da loja)
+  lib/metadados.ts       metaPagina(): título, descrição e prévia do link (WhatsApp/Facebook) de cada página nova
   lib/supabase/servico.ts cliente com a chave secreta (só servidor)
   components/admin/      formulário de produto e peças do painel
   middleware.ts          renova o login do painel
@@ -260,7 +261,7 @@ acrescentar uma linha nesse SQL.
 
 ## Lembretes para o Leonardo
 
-- [ ] Mandar para o Gilberto e o João conferirem as páginas **/trocas-e-garantia**, **/privacidade** e
+- [x] (enviado no grupo em 11/11/2026, aguardando resposta) Mandar para o Gilberto e o João conferirem as páginas **/trocas-e-garantia**, **/privacidade** e
   **/perguntas-frequentes** (rascunhos de 11/11/2026). A de privacidade idealmente passa por contador/advogado.
 
 ## Ligar pagamento e frete, passo a passo

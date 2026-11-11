@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { metaPagina } from "@/lib/metadados";
 import { loja, linkWhatsApp } from "@/data/loja";
 
 // Perguntas frequentes (11/11/2026). Só com informações confirmadas pelo Gilberto e pelo João.
@@ -124,11 +125,10 @@ const perguntas: Pergunta[] = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Perguntas frequentes",
-  description:
-    "Tire suas dúvidas sobre os kits de suspensão rosca slim: o que vem no kit, aplicação, altura, instalação, garantia, troca, pagamento e frete.",
-};
+export const metadata: Metadata = metaPagina(
+  "Perguntas frequentes",
+  "Tire suas dúvidas sobre os kits de suspensão rosca slim: o que vem no kit, aplicação, altura, instalação, garantia, troca, pagamento e frete."
+);
 
 export default function PerguntasFrequentes() {
   // Dados estruturados: ajudam o Google a mostrar as perguntas direto na busca.

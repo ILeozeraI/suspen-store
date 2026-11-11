@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { metaPagina } from "@/lib/metadados";
 import { loja, linkWhatsApp } from "@/data/loja";
 
 // Rascunho feito em 11/11/2026 a partir do que o site realmente coleta. Revisar com o Gilberto.
@@ -7,10 +8,10 @@ import { loja, linkWhatsApp } from "@/data/loja";
 const CNPJ = "69.743.693/0001-09";
 const ATUALIZADO = "11 de novembro de 2026";
 
-export const metadata: Metadata = {
-  title: "Política de privacidade",
-  description: `Como a ${loja.nome} usa e protege os seus dados pessoais, de acordo com a LGPD.`,
-};
+export const metadata: Metadata = metaPagina(
+  "Política de privacidade",
+  `Como a ${loja.nome} usa e protege os seus dados pessoais, de acordo com a LGPD.`
+);
 
 export default function Privacidade() {
   return (

@@ -5,13 +5,19 @@ import { CartaoProduto } from "@/components/CartaoProduto";
 import { linkWhatsApp } from "@/data/loja";
 import { buscarCategoria, categorias, filtrarProdutos, modelosPorMontadora } from "@/data/produtos";
 import { listarProdutos } from "@/lib/catalogo";
+import { metaPagina } from "@/lib/metadados";
 
 type Params = { categoria?: string; montadora?: string; modelo?: string; busca?: string };
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<Params> }): Promise<Metadata> {
   const sp = await searchParams;
   const cat = sp.categoria ? buscarCategoria(sp.categoria) : undefined;
-  return { title: cat ? cat.nome : "Produtos" };
+  return metaPagina(
+    cat ? cat.nome : "Produtos",
+    cat
+      ? `${cat.nome}: kits e peças com envio para todo o Brasil. Encontre pelo modelo do seu carro.`
+      : "Kits de suspensão a rosca, suspensão a ar, amortecedores e molas. Encontre pelo modelo do seu carro."
+  );
 }
 
 function montarLink(atual: Params, mudanca: Partial<Params>) {
