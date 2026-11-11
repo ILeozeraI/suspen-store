@@ -96,6 +96,7 @@ src/
   app/page.tsx           página inicial
   app/produtos/          listagem com filtros (?categoria=, ?montadora=, ?modelo=, ?busca=)
   app/produto/[slug]/    página de cada produto
+  app/sitemap.ts, robots.ts  mapa do site para o Google (/sitemap.xml, atualiza sozinho) e o que fica fora das buscas
   app/trocas-e-garantia/ página de trocas, devoluções e garantia (regras do Gilberto, 11/11/2026; link no rodapé)
   app/carrinho/          carrinho com "Finalizar pelo WhatsApp" e "Pagar no site" (leva ao checkout)
   app/pedido/concluido|pendente  telas antigas do Checkout Pro (não usadas; podem ser apagadas)
