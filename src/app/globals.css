@@ -1178,6 +1178,57 @@ h3 {
   margin-top: 12px;
 }
 
+.faq {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.faq details {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 0 20px;
+}
+
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 28px 16px 0;
+  font-weight: 700;
+  position: relative;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: var(--vermelho);
+  font-weight: 700;
+}
+
+.faq details[open] summary::after {
+  content: "−";
+}
+
+.faq details p {
+  margin: 0 0 16px;
+  color: var(--texto-suave);
+}
+
+.faq a,
+.texto-legal p a {
+  color: var(--vermelho);
+  text-decoration: underline;
+}
+
 /* ---------- responsivo ---------- */
 
 @media (max-width: 1000px) {

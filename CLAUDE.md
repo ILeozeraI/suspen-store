@@ -100,6 +100,7 @@ src/
   app/sitemap.ts, robots.ts  mapa do site para o Google (/sitemap.xml, atualiza sozinho) e o que fica fora das buscas
   app/trocas-e-garantia/ página de trocas, devoluções e garantia (regras do Gilberto, 11/11/2026; link no rodapé)
   app/privacidade/       política de privacidade (LGPD), rascunho de 11/11/2026 para o Gilberto revisar; link no rodapé
+  app/perguntas-frequentes/  perguntas frequentes (11/11/2026), com dados estruturados para o Google; link no rodapé
   app/carrinho/          carrinho com "Finalizar pelo WhatsApp" e "Pagar no site" (leva ao checkout)
   app/pedido/concluido|pendente  telas antigas do Checkout Pro (não usadas; podem ser apagadas)
   app/globals.css        todo o visual (cores e fontes no topo, em :root)
@@ -256,6 +257,11 @@ acrescentar uma linha nesse SQL.
   integra os pedidos). Atenção ao limite de faturamento anual (João citou R$ 80 mil).
 - **SKU:** o João disse para simplificar: uma identificação simples com abreviações, como a dos tubos que o Gilberto fez,
   e seguir em frente. Aplicado: SS-SLIMC-<CARRO>-4.
+
+## Lembretes para o Leonardo
+
+- [ ] Mandar para o Gilberto e o João conferirem as páginas **/trocas-e-garantia**, **/privacidade** e
+  **/perguntas-frequentes** (rascunhos de 11/11/2026). A de privacidade idealmente passa por contador/advogado.
 
 ## Ligar pagamento e frete, passo a passo
 

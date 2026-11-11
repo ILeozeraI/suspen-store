@@ -43,6 +43,9 @@ export function Rodape() {
             <li>Envio para todo o Brasil</li>
             <li>Indicação de instalador parceiro</li>
             <li>
+              <Link href="/perguntas-frequentes">Perguntas frequentes</Link>
+            </li>
+            <li>
               <Link href="/trocas-e-garantia">Trocas, devoluções e garantia</Link>
             </li>
             <li>
