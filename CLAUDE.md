@@ -167,8 +167,9 @@ acrescentar uma linha nesse SQL.
 - Cadastro público de usuários no Supabase fica **desligado**. Admins são criados à mão no painel do Supabase.
 - Sem Supabase configurado (ex.: `.env.local` sem as chaves), o site mostra a lista reserva de `src/data/produtos.ts`.
 - **Trocas e garantia** (Gilberto, 11/11/2026): garantia de **6 meses** em qualquer peça dos kits; não cobre
-  instalação errada fora do diagrama de instalação; troca por compra errada em até **7 dias**, frete por conta do
-  comprador. Desistência em 7 dias (art. 49 do CDC): devolve o valor pago, incluindo o frete.
+  instalação errada fora do diagrama de instalação; troca por compra errada em até **7 dias**, o comprador paga o
+  frete para devolver a peça. Desistência em 7 dias (art. 49 do CDC) ou cancelamento: devolve o valor pago, incluindo
+  o frete, e a loja paga o frete da devolução. Garantia e erro no envio: cliente não paga frete (fica com o fornecedor).
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
 - **SKU em revisão (10/11/2026):** a loja vai vender kit completo (4 amortecedores reduzidos, 4 tubos, 4 molas e
@@ -228,6 +229,24 @@ acrescentar uma linha nesse SQL.
 - [ ] Catálogo dos fornecedores parceiros e valores (comissão)
 - [ ] CEP **07022-290** (Guarulhos/SP), é do **fornecedor** da loja (confirmado pelo Gilberto em
   10/11/2026): de lá vão sair alguns dos produtos. Falta nome, endereço completo e comissão para cadastrar em `/admin/fornecedores`
+
+## Respostas do Gilberto e do João em 11/11/2026 (ainda não aplicadas no site)
+
+- **Preço:** o preço de venda tem que cobrir o que o fornecedor quer receber + custos + porcentagem do site + porcentagem
+  do Leonardo + lucro da sociedade. A porcentagem do Leonardo ainda não foi fechada. Gilberto e João vão calcular.
+- **Custos levantados:** frete, plataforma (mensalidade do site, se houver), ADS, Bling, NF-e (se emitir). O chip do
+  WhatsApp é pré-pago (R$ 30 a cada 2 meses). Leonardo respondeu (11/11): hoje Vercel, Supabase e
+  Hostinger (domínio) estão em planos grátis ou anuais; no futuro vai precisar pagar. **Vercel Hobby é só para uso não
+  comercial: passar para o Pro (US$ 20/mês) antes de ligar o pagamento.** Supabase Pro: US$ 25/mês.
+- **Fretes:** a loja paga o primeiro envio e o retorno da peça em desistência ou cancelamento. Garantia e erro no envio:
+  frete por conta do fornecedor. Compra errada: o comprador paga o frete de ida. Gilberto perguntou se ativar a logística
+  reversa (devolução) no Melhor Envio encarece o frete. Página /trocas-e-garantia já atualizada (11/11).
+- **Rosca slim:** todos os kits saem do fornecedor de Guarulhos (CEP 07022-290). Vão entrar outros fornecedores com os
+  mesmos produtos (outro endereço). O Gilberto está pegando os dados do fornecedor.
+- **Nota fiscal:** no começo a loja opera como se comprasse e revendesse; emite nota só quando o cliente pedir (Bling
+  integra os pedidos). Atenção ao limite de faturamento anual (João citou R$ 80 mil).
+- **SKU:** o João disse para simplificar: uma identificação simples com abreviações, como a dos tubos que o Gilberto fez,
+  e seguir em frente.
 
 ## Ligar pagamento e frete, passo a passo
 

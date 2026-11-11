@@ -37,6 +37,11 @@ export default function TrocasEGarantia() {
           </li>
         </ul>
         <p>Por isso, recomendamos que a instalação seja feita por um profissional, seguindo o diagrama.</p>
+        <h3>Frete na garantia</h3>
+        <p>
+          Se o defeito for confirmado, <strong>você não paga frete</strong>: o envio da peça de volta e da peça nova fica
+          por nossa conta. O mesmo vale se enviarmos um produto errado.
+        </p>
       </section>
 
       <section>
@@ -50,8 +55,7 @@ export default function TrocasEGarantia() {
             O produto deve voltar <strong>sem sinais de instalação</strong>, com todas as peças e na embalagem original.
           </li>
           <li>
-            <strong>O frete da troca é por conta do comprador</strong>, tanto o envio para nós quanto o envio da peça
-            nova.
+            <strong>O frete para devolver a peça é por conta do comprador.</strong>
           </li>
         </ul>
         <p>
@@ -65,7 +69,8 @@ export default function TrocasEGarantia() {
         <p>
           Pelo Código de Defesa do Consumidor (art. 49), quem compra pela internet pode desistir da compra em até{" "}
           <strong>7 dias</strong> depois de receber o pedido, sem precisar explicar o motivo. Nesse caso, devolvemos{" "}
-          <strong>o valor que você pagou, incluindo o frete</strong>, depois que o produto chegar de volta.
+          <strong>o valor que você pagou, incluindo o frete</strong>, depois que o produto chegar de volta, e{" "}
+          <strong>o frete da devolução fica por nossa conta</strong>. O mesmo vale se o pedido for cancelado.
         </p>
       </section>
 
