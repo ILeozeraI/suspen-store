@@ -69,6 +69,7 @@ supabase/
                          no kit (4 amortecedores reduzidos com tubos de rosca, 4 molas e 4 batentes); slug não muda
   016_sku_kits_completos.sql  SKU final dos kits completos: SS-SLIM-GOLG5 vira SS-SLIMC-GOLG5-4
 public/
+  googlef3704ecf39541f9e.html  verificação do Google Search Console (conta suspenstoreoficial@gmail.com). **Não apagar.**
   marca/                 logo (original, transparente e só o texto para o cabeçalho)
   produtos/              fotos dos produtos (nome: categoria-modelo.jpg, minúsculo, sem espaço)
 src/
