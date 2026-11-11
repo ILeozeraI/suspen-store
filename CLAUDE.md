@@ -99,6 +99,7 @@ src/
   app/produto/[slug]/    página de cada produto
   app/sitemap.ts, robots.ts  mapa do site para o Google (/sitemap.xml, atualiza sozinho) e o que fica fora das buscas
   app/trocas-e-garantia/ página de trocas, devoluções e garantia (regras do Gilberto, 11/11/2026; link no rodapé)
+  app/privacidade/       política de privacidade (LGPD), rascunho de 11/11/2026 para o Gilberto revisar; link no rodapé
   app/carrinho/          carrinho com "Finalizar pelo WhatsApp" e "Pagar no site" (leva ao checkout)
   app/pedido/concluido|pendente  telas antigas do Checkout Pro (não usadas; podem ser apagadas)
   app/globals.css        todo o visual (cores e fontes no topo, em :root)
@@ -226,6 +227,8 @@ acrescentar uma linha nesse SQL.
 - [ ] Número definitivo do WhatsApp comercial (hoje: 11 96833-4426)
 - [ ] Lista de instaladores parceiros (nome, cidade, contato)
 - [x] Domínio suspenstore.com.br apontado para o site novo (09/11/2026)
+- [x] Google Search Console: propriedade https://www.suspenstore.com.br/ verificada (arquivo HTML) e sitemap.xml enviado
+  em 11/11/2026, na conta suspenstoreoficial@gmail.com. Acompanhar em Indexação > Páginas e Desempenho.
 - [ ] Endereço completo do estoque (hoje: CEP 06150108 provisório, só para frete; CNPJ 69.743.693/0001-09 já cadastrado)
 - [ ] Verificação da conta do Melhor Envio (precisa ser feita pela titular) e saldo para etiquetas
 - [ ] Conta do Bling (CNPJ novo ainda não aparecia na Receita em 22/10/2026)

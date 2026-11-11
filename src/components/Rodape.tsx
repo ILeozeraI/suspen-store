@@ -45,6 +45,9 @@ export function Rodape() {
             <li>
               <Link href="/trocas-e-garantia">Trocas, devoluções e garantia</Link>
             </li>
+            <li>
+              <Link href="/privacidade">Política de privacidade</Link>
+            </li>
           </ul>
         </div>
       </div>

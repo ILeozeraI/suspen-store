@@ -28,5 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     { url: `${site}/trocas-e-garantia`, changeFrequency: "monthly", priority: 0.3 },
+    { url: `${site}/privacidade`, changeFrequency: "yearly", priority: 0.2 },
   ];
 }
