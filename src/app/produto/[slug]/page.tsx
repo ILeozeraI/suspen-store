@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OQueVemNoKit, SelosConfianca } from "@/components/InfoKit";
 import { notFound } from "next/navigation";
 import { BotaoAdicionar } from "@/components/BotaoAdicionar";
 import { CartaoProduto } from "@/components/CartaoProduto";
@@ -33,6 +34,8 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
 
   const cat = buscarCategoria(p.categoria);
   const relacionados = produtos.filter((x) => x.categoria === p.categoria && x.slug !== p.slug).slice(0, 4);
+  // Kits rosca slim completos: mostram o bloco "O que vem no kit"
+  const kitCompleto = p.slug.startsWith("kit-rosca-slim-");
   const msgDuvida = `Olá! Tenho interesse no ${p.nome}${p.sku ? ` (${p.sku})` : ""}. Meu carro é: (modelo, ano e motor)`;
 
   return (
@@ -51,6 +54,8 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
           </span>
           <h1>{p.nome}</h1>
           <p style={{ margin: 0 }}>{p.resumo}</p>
+
+          {kitCompleto && <OQueVemNoKit />}
 
           <div className="produto__preco">
             {p.preco ? (
@@ -80,6 +85,8 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
             </a>
           </div>
 
+          <SelosConfianca />
+
           <dl className="ficha">
             {p.sku && (
               <>
@@ -101,6 +108,17 @@ export default async function PaginaProduto({ params }: { params: Promise<{ slug
           {p.observacao && <div className="aviso-aplicacao">{p.observacao}</div>}
         </div>
       </div>
+
+      {/* Celular: botão de comprar sempre à vista, fixo embaixo da tela */}
+      {!esgotado(p) && (
+        <div className="barra-compra">
+          <div>
+            <small>{p.nome}</small>
+            <strong>{p.preco ? formatarPreco(p.preco) : "Consulte o preço"}</strong>
+          </div>
+          <BotaoAdicionar slug={p.slug} />
+        </div>
+      )}
 
       {relacionados.length > 0 && (
         <section className="secao" style={{ paddingTop: 8 }}>

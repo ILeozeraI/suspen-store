@@ -1229,6 +1229,174 @@ h3 {
   text-decoration: underline;
 }
 
+/* ---------- produto: o que vem no kit, selos e barra de compra (celular) ---------- */
+
+.kit-itens h2 {
+  font-size: 1.15rem;
+  font-style: italic;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.kit-itens ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.kit-itens li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.kit-itens li strong {
+  font-family: "Barlow Condensed", sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--vermelho);
+}
+
+.kit-itens li span {
+  font-weight: 700;
+  line-height: 1.15;
+  display: grid;
+}
+
+.kit-itens li small {
+  font-weight: 400;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
+.selos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.selos li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 4px;
+}
+
+.selos li > span {
+  font-size: 1.4rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff4f4;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.selos strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.selos small {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
+.barra-compra {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .kit-itens li {
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+    padding: 10px 6px;
+  }
+
+  .kit-itens li strong {
+    font-size: 2rem;
+  }
+
+  .kit-itens li span {
+    font-size: 0.85rem;
+  }
+
+  .kit-itens li small {
+    display: none;
+  }
+
+  .selos {
+    grid-template-columns: 1fr;
+  }
+
+  .barra-compra {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background: var(--branco);
+    border-top: 1px solid var(--linha);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .barra-compra > div {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+  }
+
+  .barra-compra small {
+    color: var(--texto-suave);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .barra-compra strong {
+    font-size: 1.05rem;
+    color: var(--vermelho);
+  }
+
+  .barra-compra strong {
+    white-space: nowrap;
+  }
+
+  .barra-compra .btn {
+    flex: none;
+    width: auto;
+    padding: 12px 18px;
+  }
+
+  /* com a barra fixa, o botão do WhatsApp sobe e o fim da página não fica escondido */
+  body:has(.barra-compra) .whats-flutuante {
+    bottom: 92px;
+  }
+
+  body:has(.barra-compra) .rodape {
+    padding-bottom: 76px;
+  }
+}
+
 /* ---------- responsivo ---------- */
 
 @media (max-width: 1000px) {

@@ -94,6 +94,7 @@ src/
   lib/supabase/servico.ts cliente com a chave secreta (só servidor)
   components/admin/      formulário de produto e peças do painel
   middleware.ts          renova o login do painel
+  components/InfoKit.tsx  bloco "O que vem no kit" (só kits rosca slim completos) e selos de confiança da página do produto
   components/            cabeçalho, rodapé, cartão de produto, carrinho, busca por carro, botão do WhatsApp
   app/page.tsx           página inicial
   app/produtos/          listagem com filtros (?categoria=, ?montadora=, ?modelo=, ?busca=)
@@ -176,6 +177,9 @@ acrescentar uma linha nesse SQL.
   instalação errada fora do diagrama de instalação; troca por compra errada em até **7 dias**, o comprador paga o
   frete para devolver a peça. Desistência em 7 dias (art. 49 do CDC) ou cancelamento: devolve o valor pago, incluindo
   o frete, e a loja paga o frete da devolução. Garantia e erro no envio: cliente não paga frete (fica com o fornecedor).
+- **Página do produto** (11/11/2026): informações do kit ficam no próprio site (bloco "O que vem no kit"), não escritas
+  nas fotos, porque o Google Shopping bloqueia fotos com texto (pedido do João). Selos de confiança (garantia, troca,
+  envio, pagamento seguro) e, no celular, barra fixa com "Adicionar ao carrinho" (o site é o foco, pedido do Gilberto).
 - Visual inspirado no site da Castor Suspensões (castorsuspensoes.com.br), com a identidade da logo da Suspen Store:
   preto, vermelho e prata. Títulos em Barlow Condensed itálico, texto em Barlow.
 - **SKU em revisão (10/11/2026):** a loja vai vender kit completo (4 amortecedores reduzidos, 4 tubos, 4 molas e
