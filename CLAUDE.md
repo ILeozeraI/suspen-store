@@ -239,8 +239,9 @@ acrescentar uma linha nesse SQL.
 - [ ] Verificação da conta do Melhor Envio (precisa ser feita pela titular) e saldo para etiquetas
 - [ ] Conta do Bling (CNPJ novo ainda não aparecia na Receita em 22/10/2026)
 - [ ] Catálogo dos fornecedores parceiros e valores (comissão)
-- [ ] CEP **07022-290** (Guarulhos/SP), é do **fornecedor** da loja (confirmado pelo Gilberto em
-  10/11/2026): de lá vão sair alguns dos produtos. Falta nome, endereço completo e comissão para cadastrar em `/admin/fornecedores`
+- [ ] Fornecedor **Formula Amortecedores Especiais LTDA**, CNPJ 48.210.240/0001-47, Rua Soldado Altino Martins da
+  Vitoria, 21, CEP **07022-290** (Guarulhos/SP), dados mandados pelo Gilberto em 16/11/2026. De lá saem os kits rosca
+  slim. Kit embalado: 14 kg, caixa 20 x 30 x 40 cm. Falta a comissão para cadastrar em `/admin/fornecedores`
 
 ## Respostas do Gilberto e do João em 11/11/2026 (ainda não aplicadas no site)
 
@@ -255,7 +256,7 @@ acrescentar uma linha nesse SQL.
   reversa (devolução) no Melhor Envio encarece o frete. Página /trocas-e-garantia já atualizada (11/11).
 - **VPS:** o João perguntou (11/11) se dá para subir o site numa VPS depois. Dá: Next.js roda em VPS (Node ou Docker), o
   Supabase continua igual. Na VPS é preciso cuidar de deploy, https, atualizações e do cron `/api/manter-ativo`.
-  Pode sair mais barato que a Vercel Pro. Ainda não decidido; falta saber qual VPS eles têm.
+  Pode sair mais barato que a Vercel Pro. **Decidido em 13/11/2026: fica na Vercel**; a VPS é o plano B.
 - **Rosca slim:** todos os kits saem do fornecedor de Guarulhos (CEP 07022-290). Vão entrar outros fornecedores com os
   mesmos produtos (outro endereço). O Gilberto está pegando os dados do fornecedor.
 - **Nota fiscal:** no começo a loja opera como se comprasse e revendesse; emite nota só quando o cliente pedir (Bling
@@ -267,6 +268,17 @@ acrescentar uma linha nesse SQL.
 
 - [x] (enviado no grupo em 11/11/2026, aguardando resposta) Mandar para o Gilberto e o João conferirem as páginas **/trocas-e-garantia**, **/privacidade** e
   **/perguntas-frequentes** (rascunhos de 11/11/2026). A de privacidade idealmente passa por contador/advogado.
+- [ ] **Webhook do Mercado Pago** (anotado em 24/11/2026): no painel do Mercado Pago > Suas integrações > aplicação do
+  site > Webhooks > Configurar notificações, modo produção, URL `https://www.suspenstore.com.br/api/mercadopago/webhook`,
+  evento "Pagamentos". A assinatura secreta vai direto para `MP_WEBHOOK_SECRET` na Vercel (nunca por mensagem).
+- [ ] **Vercel Pro** (24/11/2026): decidido ficar na Vercel (Pro US$ 20/mês) e passar o Supabase para o Pro só quando
+  crescer; VPS fica como plano B. O cartão virtual pré-pago do Mercado Pago foi recusado ("only credit and debit
+  cards"); o João vai usar o cartão de débito físico, que chega em 25/11. Fazer o upgrade em Settings > Billing.
+- [ ] **Frete grátis** (Gilberto, 16/11/2026): embutir um valor fixo de frete no preço do kit (exemplo dele: R$ 80) e
+  mostrar "frete grátis" pelo PAC; quem quiser SEDEX paga o **SEDEX inteiro** (hoje o código cobra só a diferença
+  SEDEX − PAC: ajustar). Simulação de 17/11 (Formula → capitais, kit 14 kg, caixa 20x30x40, `scripts/cotacao-capitais.mjs`):
+  SP capital R$ 46,51 (só SEDEX), interior SP R$ 58,41, Sul/Sudeste/Centro-Oeste R$ 80,71, BA/MT R$ 91,36,
+  CE/PE/PA/TO R$ 102,94, resto do Norte e Nordeste R$ 125,10. Falta o Gilberto decidir o valor.
 
 ## Ligar pagamento e frete, passo a passo
 
